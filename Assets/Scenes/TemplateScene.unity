@@ -1460,6 +1460,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f6642286dd91f7949b2831b565b1b5e3, type: 2}
+    - target: {fileID: 3452551011384809448, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452551011384809448, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452551011384809448, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5872696333753883374, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
