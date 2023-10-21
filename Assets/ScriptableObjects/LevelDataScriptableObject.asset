@@ -18,7 +18,9 @@ MonoBehaviour:
   LevelDataList:
   - Level: 0
     Score: 0
-    StartingPoint: {fileID: 0}
+    StartingPoint: {fileID: 689865285926204261, guid: 4b103084e0da7f44f861104b6a7ed910, type: 3}
+    StartingLives: 3
   - Level: 1
     Score: 0
     StartingPoint: {fileID: 0}
+    StartingLives: 3

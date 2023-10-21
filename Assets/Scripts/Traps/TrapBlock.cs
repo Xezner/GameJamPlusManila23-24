@@ -6,7 +6,7 @@ public class TrapBlock : MonoBehaviour
 {
     [SerializeField] private GameStateDataScriptableObject _gameState;
 
-    private float _timeDelay = 2f;
+    private float _timeDelay = 1f;
     private bool _isDead = false;
     private void OnCollisionEnter2D(Collision2D collision)
     {

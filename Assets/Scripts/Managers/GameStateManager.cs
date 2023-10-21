@@ -46,6 +46,7 @@ public class GameStateManager : SingletonPersistent<GameStateManager>
     private void Instance_OnLevelStart(object sender, LevelDataScriptableObject.OnLevelStartEventArgs onLevelStart)
     {
         _gameStateData.CurrentPlayerLives = onLevelStart.LevelData.StartingLives;
+        _gameStateData.CurrentLevelData = onLevelStart.LevelData;
     }
 }
 
