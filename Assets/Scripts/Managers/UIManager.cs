@@ -94,7 +94,17 @@ public class UIManager : SingletonPersistent<UIManager>
     [Serializable]
     public struct PauseMenuButtons
     {
+        [Header("Pause Home Button", order = 2)]
+        [SerializeField] public Button BackButton;
+        [SerializeField] public TextMeshProUGUI BackText;
 
+        [Header("Pause Resume Button", order = 2)]
+        [SerializeField] public Button ResumeButton;
+        [SerializeField] public TextMeshProUGUI ResumeText;
+
+        [Header("Pause Options Button", order = 2)]
+        [SerializeField] public Button OptionsButton;
+        [SerializeField] public TextMeshProUGUI OptionsText;
     }
 
     private void Start()
@@ -110,6 +120,10 @@ public class UIManager : SingletonPersistent<UIManager>
         SetMainMenuUI();
 
         SetOptionsMenuUI();
+
+        SetPauseMenuUI();
+
+        SetGameOverMenuUI();
     }
 
     // for testing purposes, disable this or comment this on final build
@@ -119,7 +133,7 @@ public class UIManager : SingletonPersistent<UIManager>
         {
             return;
         }
-
+        UpdateUIOnFTUEData();
         SetLayoutGroup(_verticalLayoutGroup, _mainMenuUIData.LayoutSpacing, _mainMenuUIData.IsHeightSizeControlled, _mainMenuUIData.IsWidthSizeControlled);
         SetMainMenuButtons();
     }
@@ -130,7 +144,7 @@ public class UIManager : SingletonPersistent<UIManager>
         if(_ftueData.IsTutorialOver)
         {
             _mainMenuUIElements.TutorialButton.gameObject.SetActive(false);
-            _mainMenuUIElements.TutorialButton.gameObject.SetActive(true);
+            _mainMenuUIElements.StartButton.gameObject.SetActive(true);
         }
     }
 
@@ -148,6 +162,19 @@ public class UIManager : SingletonPersistent<UIManager>
     {
         SetPanelBackground(_optionsMenuPanel, _mainMenuUIData.OptionsMenuBackground);
         SetButton(_optionMenuUIElements.OptionsExitButton, _optionMenuUIElements.OptionsExitText, _mainMenuUIData.GeneralButtonSprite, _mainMenuUIData.GeneralButtonTextData);
+    }
+
+    private void SetPauseMenuUI()
+    {
+                                              //replace with own background
+        SetPanelBackground(_pauseMenuPanel, _mainMenuUIData.MainMenuBackground);
+        SetPauseMenuButtons();
+    }
+
+    private void SetGameOverMenuUI()
+    {                                      //replace with own background
+        SetPanelBackground(_gameOverPanel, _mainMenuUIData.MainMenuBackground);
+        SetGameOverMenuButtons();
     }
 
     //Updates the sprite of a logo/image
@@ -189,6 +216,34 @@ public class UIManager : SingletonPersistent<UIManager>
         }
     }
 
+    private void SetPauseMenuButtons()
+    {
+        List<Tuple<Button, TextMeshProUGUI>> genericButtonList = new()
+        {
+            new(_pauseMenuButtons.OptionsButton, _pauseMenuButtons.OptionsText),
+            new(_pauseMenuButtons.ResumeButton, _pauseMenuButtons.ResumeText),
+            new(_pauseMenuButtons.BackButton, _pauseMenuButtons.BackText)
+        };
+
+        foreach (Tuple<Button, TextMeshProUGUI> buttonData in genericButtonList)
+        {
+            SetButton(buttonData.Item1, buttonData.Item2, _mainMenuUIData.GeneralButtonSprite, _mainMenuUIData.GeneralButtonTextData);
+        }
+    }
+
+    private void SetGameOverMenuButtons()
+    {
+        List<Tuple<Button, TextMeshProUGUI>> genericButtonList = new()
+        {
+            new(_gameOverUIElements.RetryButton, _gameOverUIElements.RetryText),
+            new(_gameOverUIElements.BackButton, _gameOverUIElements.BackText)
+        };
+
+        foreach (Tuple<Button, TextMeshProUGUI> buttonData in genericButtonList)
+        {
+            SetButton(buttonData.Item1, buttonData.Item2, _mainMenuUIData.GeneralButtonSprite, _mainMenuUIData.GeneralButtonTextData);
+        }
+    }
     
     //Updates a specific button's sprite, text color, font size, and font style, adjust button native size
     private void SetButton(Button button, TextMeshProUGUI buttonText, Sprite sprite, ButtonTextData buttonTextData, bool isButtonNativeSize = false)
