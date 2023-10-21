@@ -45,6 +45,8 @@ public class PowerUpManager : MonoBehaviour
         {
             _powerUpState.TransformBallSize(false);
         }
+
+        Debug.Log(_playerStats.JumpPower);
     }
 
     private void Instance_OnTransformChanged(object sender, PowerUpStateScriptableObject.OnTransformChangedEventArgs onTransformChangedEvent)
@@ -52,6 +54,7 @@ public class PowerUpManager : MonoBehaviour
         _collider.size = onTransformChangedEvent.TransformData.NewSize;
         _bounceGameObject.transform.localScale = onTransformChangedEvent.TransformData.NewSize;
         _playerStats.GroundingForce = onTransformChangedEvent.TransformData.GroundingForce;
+        _playerStats.JumpPower = onTransformChangedEvent.TransformData.MaxJump;//
     }
 
     private void Instance_OnSpeedBlockBuff(object sender, PowerUpStateScriptableObject.OnSpeedBlockBuffEventArgs onSpeedBlockBuffEvent)
@@ -111,6 +114,7 @@ public struct TransformData
     public Vector3 NewSize;
     public float GroundingForce;
     public bool IsNormalSize;
+    public float MaxJump;//
 }
 
 [Serializable]
