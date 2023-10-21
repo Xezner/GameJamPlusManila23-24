@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour, IPlayerController
     [Header("Power Up State Scriptable Object")]
     [SerializeField] private PowerUpStateScriptableObject _powerUpState;
 
+    [Header("Game State Scriptable Object")]
+    [SerializeField] private GameStateDataScriptableObject _gameState;
+
     [Header("Player Components")]
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private CapsuleCollider2D _collider;
@@ -66,6 +69,12 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void Update()
     {
+        if(_gameState.CurrentGameState != GameState.IsPlaying)
+        {
+            Debug.Log("Not palying");
+            return;
+        }
+
         _time += Time.deltaTime;
         GatherInput();
     }
@@ -120,6 +129,12 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void FixedUpdate()
     {
+        if (_gameState.CurrentGameState != GameState.IsPlaying)
+        {
+            Debug.Log("Not palying");
+            return;
+        }
+
         CheckCollisions();
 
         HandleJump();

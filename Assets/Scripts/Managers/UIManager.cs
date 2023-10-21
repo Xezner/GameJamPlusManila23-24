@@ -114,6 +114,7 @@ public class UIManager : SingletonPersistent<UIManager>
         if(_ftueData.IsTutorialOver)
         {
             _mainMenuUIElements.TutorialButton.gameObject.SetActive(false);
+            _mainMenuUIElements.TutorialButton.gameObject.SetActive(true);
         }
     }
 

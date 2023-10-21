@@ -26,9 +26,4 @@ public class GameStateDataScriptableObject : ScriptableObject
     }
 }
 
-public enum GameState
-{
-    IsPaused,
-    IsPlaying,
-    IsGameOver
-}
+
