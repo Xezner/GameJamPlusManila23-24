@@ -21,6 +21,7 @@ public class PlayerStatsScriptableObject : ScriptableObject
 
     [Header("MOVEMENT")]
     [Tooltip("The top horizontal movement speed")]
+    public float DefaultMaxSpeed = 14f;
     public float MaxSpeed = 14;
 
     [Tooltip("The player's capacity to gain horizontal speed")]

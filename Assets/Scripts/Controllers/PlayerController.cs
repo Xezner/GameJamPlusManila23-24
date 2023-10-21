@@ -31,6 +31,12 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private bool _isBounceAmplified = false;
     private float _bounceMultiplier = 1f;
 
+    //Transform change
+    private bool _isNormalSized = true;
+
+    //Water
+    private bool _isOnWater = false;
+
     private const string JUMP = "Jump";
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
@@ -49,6 +55,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         _powerUpState.OnGravityReversed += Instance_OnGravityReversed;
         _powerUpState.OnBounceAmplify += Instance_OnBounceAmplify;
+        _powerUpState.OnTransformChanged += Instance_OnTransformChanged;
+        _powerUpState.OnEnterWater += Instance_OnEnterWater;
     }
     private void Awake()
     {
@@ -74,6 +82,16 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         _isBounceAmplified = onBounceAmplifyEvent.IsBounceAmplified;
     }
+
+    private void Instance_OnTransformChanged(object sender, PowerUpStateScriptableObject.OnTransformChangedEventArgs onTransformChangedEvent)
+    {
+        _isNormalSized = onTransformChangedEvent.TransformData.IsNormalSize;
+    }
+    private void Instance_OnEnterWater(object sender, PowerUpStateScriptableObject.OnEnterWaterEventArgs onEnterWaterEvent)
+    {
+        _isOnWater = onEnterWaterEvent.IsOnWater;
+    }
+
     #endregion
 
 
@@ -284,13 +302,22 @@ public class PlayerController : MonoBehaviour, IPlayerController
         {
             return transform.position.y > _peakHeight;
         }
-        Debug.Log("Reversed");
         return transform.position.y < _peakHeight;
     }
 
     #endregion
 
-    private void ApplyMovement() => _rigidBody.velocity = _frameVelocity * _gravityData.ReverseMultiplier;
+    private void ApplyMovement()
+    {
+        if (!_isNormalSized && _isOnWater)
+        {
+            _rigidBody.velocity = new(_frameVelocity.x * _gravityData.ReverseMultiplier, _rigidBody.velocity.y);
+        }
+        else
+        {
+            _rigidBody.velocity = _frameVelocity * _gravityData.ReverseMultiplier;
+        }
+    }
 
 }
 
