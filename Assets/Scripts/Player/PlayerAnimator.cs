@@ -140,5 +140,5 @@ public class PlayerAnimator : MonoBehaviour
 
     private static readonly int GroundedKey = Animator.StringToHash(GROUND_KEY);
     private static readonly int IdleSpeedKey = Animator.StringToHash(IDLE_SPEED_KEY);
-    private static readonly int JumpKey = Animator.StringToHash(JUMP_KEYs);
+    private static readonly int JumpKey = Animator.StringToHash(JUMP_KEY);
 }
