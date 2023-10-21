@@ -47,7 +47,6 @@ public class PlayerAnimator : MonoBehaviour
     {
         _player.Jumped += OnJumped;
         _player.GroundedChanged += OnGroundedChanged;
-
         _moveParticles.Play();
     }
 
@@ -55,7 +54,6 @@ public class PlayerAnimator : MonoBehaviour
     {
         _player.Jumped -= OnJumped;
         _player.GroundedChanged -= OnGroundedChanged;
-
         _moveParticles.Stop();
     }
 
