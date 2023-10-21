@@ -1404,18 +1404,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1141527797150874124, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f6642286dd91f7949b2831b565b1b5e3, type: 2}
-    - target: {fileID: 2509729367667353276, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f6642286dd91f7949b2831b565b1b5e3, type: 2}
-    - target: {fileID: 2602843025262364616, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 02e908d58f43eae42b670f78cd79edcd, type: 2}
     - target: {fileID: 2837333282643869279, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.77
@@ -1456,34 +1444,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2840198203566532343, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f6642286dd91f7949b2831b565b1b5e3, type: 2}
-    - target: {fileID: 3452551011384809448, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3452551011384809448, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3452551011384809448, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5872696333753883374, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f6642286dd91f7949b2831b565b1b5e3, type: 2}
-    - target: {fileID: 6336253921936390125, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f6642286dd91f7949b2831b565b1b5e3, type: 2}
-    - target: {fileID: 7628795322450430626, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f6642286dd91f7949b2831b565b1b5e3, type: 2}
     - target: {fileID: 8495467747262935836, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
       propertyPath: m_Name
       value: PLAYER_BounceParent
