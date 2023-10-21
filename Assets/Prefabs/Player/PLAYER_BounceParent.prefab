@@ -19656,7 +19656,7 @@ Transform:
   m_GameObject: {fileID: 5779209616514751583}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.148, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29600,8 +29600,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerStats: {fileID: 11400000, guid: 691b6ba613f115645be92bdd93db1a09, type: 2}
   _powerUpState: {fileID: 11400000, guid: a10c9fa049ecc2b4d83db28d64bb8d78, type: 2}
+  _gameState: {fileID: 11400000, guid: 6e94f0aa9503ad6489efdc62f3f8b712, type: 2}
   _rigidBody: {fileID: 3452551011384809448}
   _collider: {fileID: 2061495954107195887}
+  _bounceSprite: {fileID: 515646053391934722}
 --- !u!1 &8500131787079050779
 GameObject:
   m_ObjectHideFlags: 0
