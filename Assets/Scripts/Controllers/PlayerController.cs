@@ -1,19 +1,35 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [SelectionBase]
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerController : MonoBehaviour, IPlayerController
 {
+    [Header("Player Stats Scriptable Object")]
     [SerializeField] private PlayerStatsScriptableObject _playerStats;
+
+    [Header("Power Up State Scriptable Object")]
+    [SerializeField] private PowerUpStateScriptableObject _powerUpState;
+
+    [Header("Player Components")]
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private CapsuleCollider2D _collider;
 
     private FrameInput _frameInput;
     private Vector2 _frameVelocity;
     private bool _cachedQueryStartInColliders;
+
+    //Gravity
+    private GravityData _gravityData;
+    private bool _isGravityChanged = false;
+    private float _groundingForce;
+
+    //Bounce Amplify;
+    private bool _isBounceAmplified = false;
+    private float _bounceMultiplier = 1f;
 
     private const string JUMP = "Jump";
     private const string HORIZONTAL = "Horizontal";
@@ -29,9 +45,15 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private float _time;
 
+    private void Start()
+    {
+        _powerUpState.OnGravityReversed += Instance_OnGravityReversed;
+        _powerUpState.OnBounceAmplify += Instance_OnBounceAmplify;
+    }
     private void Awake()
     {
         _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
+        _gravityData = _powerUpState.NormalGravityData;
     }
 
     private void Update()
@@ -39,6 +61,21 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _time += Time.deltaTime;
         GatherInput();
     }
+
+    #region Events
+    private void Instance_OnGravityReversed(object sender, PowerUpStateScriptableObject.OnGravityReversedEventArgs onGravityReversedEvent)
+    {
+        _gravityData = onGravityReversedEvent.GravityData;
+        transform.rotation = Quaternion.Euler(onGravityReversedEvent.GravityData.Rotation);
+        _isGravityChanged = true;
+    }
+
+    private void Instance_OnBounceAmplify(object sender, PowerUpStateScriptableObject.OnBounceAmplifyEventArgs onBounceAmplifyEvent)
+    {
+        _isBounceAmplified = onBounceAmplifyEvent.IsBounceAmplified;
+    }
+    #endregion
+
 
     private void GatherInput()
     {
@@ -83,17 +120,19 @@ public class PlayerController : MonoBehaviour, IPlayerController
         Physics2D.queriesStartInColliders = false;
 
         // Ground and Ceiling
-        bool groundHit = Physics2D.CapsuleCast(_collider.bounds.center, _collider.size, _collider.direction, 0, Vector2.down, _playerStats.GrounderDistance, ~_playerStats.PlayerLayer);
-        bool ceilingHit = Physics2D.CapsuleCast(_collider.bounds.center, _collider.size, _collider.direction, 0, Vector2.up, _playerStats.GrounderDistance, ~_playerStats.PlayerLayer);
+        bool isGroundHit = Physics2D.CapsuleCast(_collider.bounds.center, _collider.size, _collider.direction, 0, Vector2.down, _playerStats.GrounderDistance, ~_playerStats.PlayerLayer);
+        bool isCeilingHit = Physics2D.CapsuleCast(_collider.bounds.center, _collider.size, _collider.direction, 0, Vector2.up, _playerStats.GrounderDistance, ~_playerStats.PlayerLayer);
+        
+        GetCeilingAndGround(ref isCeilingHit, ref isGroundHit);
 
         // Hit a Ceiling
-        if (ceilingHit)
+        if (isCeilingHit)
         {
             _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);
         }
 
         // Landed on the Ground
-        if (!_grounded && groundHit)
+        if (!_grounded && isGroundHit)
         {
             _grounded = true;
             _coyoteUsable = true;
@@ -102,14 +141,27 @@ public class PlayerController : MonoBehaviour, IPlayerController
             GroundedChanged?.Invoke(true, Mathf.Abs(_frameVelocity.y));
         }
         // Left the Ground
-        else if (_grounded && !groundHit)
+        else if (_grounded && !isGroundHit)
         {
             _grounded = false;
             _frameLeftGrounded = _time;
             GroundedChanged?.Invoke(false, 0);
         }
 
+        if(_grounded && isGroundHit && !_isBounceAmplified)
+        {
+            _bounceMultiplier = 1;
+        }
+
         Physics2D.queriesStartInColliders = _cachedQueryStartInColliders;
+    }
+
+    private void GetCeilingAndGround(ref bool isCeilingHit, ref bool isGroundHit)
+    {
+        if (_gravityData.IsGravityReversed)
+        {
+            (isCeilingHit, isGroundHit) = (isGroundHit, isCeilingHit);
+        }
     }
 
     #endregion
@@ -150,6 +202,14 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         ResetJumpStates();
         _frameVelocity.y = _playerStats.JumpPower;
+        if(_isBounceAmplified)
+        {
+            Debug.Log("Bounce Amplified");
+            _bounceMultiplier *= 1.5f;
+            _bounceMultiplier = _bounceMultiplier > 10f ? 10f : _bounceMultiplier;
+            _frameVelocity.y *= _bounceMultiplier;
+        }
+        _isBounceAmplified = false;
         Jumped?.Invoke();
     }
 
@@ -184,7 +244,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private float _peakHeight = 0;
     private void HandleGravity()
     {
-        if (transform.position.y > _peakHeight)
+        if (IsPeakHeight())
         {
             _peakHeight = transform.position.y;
         }
@@ -193,17 +253,18 @@ public class PlayerController : MonoBehaviour, IPlayerController
         {
             float bounceForce = 0f;
 
-            if (!_frameInput.JumpHeld)
+            if (!_frameInput.JumpHeld && !_isGravityChanged)
             {
                 float heightDifference = _peakHeight - (transform.position.y);
-                bounceForce = Mathf.Max(_playerStats.JumpPower * (heightDifference * _playerStats.HeightPercentageMultiplier) * _playerStats.BounceDecayMultiplier, _playerStats.GroundingForce);
+                bounceForce = Mathf.Max(_playerStats.JumpPower * (heightDifference * _playerStats.HeightPercentageMultiplier) * _gravityData.BounceMultiplier, _playerStats.GroundingForce);
             }
 
             bounceForce = bounceForce <= 1f ? _playerStats.GroundingForce : bounceForce;
             _frameVelocity.y = bounceForce;
 
             //Reset values
-            _peakHeight = _playerStats.GroundPosition;
+            _peakHeight = _playerStats.GroundPosition * _gravityData.ReverseMultiplier;
+            _isGravityChanged = false;
         }
         else if (!_grounded)
         {
@@ -217,9 +278,19 @@ public class PlayerController : MonoBehaviour, IPlayerController
         }
     }
 
+    private bool IsPeakHeight()
+    {
+        if(!_gravityData.IsGravityReversed)
+        {
+            return transform.position.y > _peakHeight;
+        }
+        Debug.Log("Reversed");
+        return transform.position.y < _peakHeight;
+    }
+
     #endregion
 
-    private void ApplyMovement() => _rigidBody.velocity = _frameVelocity;
+    private void ApplyMovement() => _rigidBody.velocity = _frameVelocity * _gravityData.ReverseMultiplier;
 
 }
 
