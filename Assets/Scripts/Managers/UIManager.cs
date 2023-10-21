@@ -35,6 +35,10 @@ public class UIManager : SingletonPersistent<UIManager>
     [SerializeField] private Image _pauseMenuPanel;
     [SerializeField] private PauseMenuButtons _pauseMenuButtons;
 
+    [Header("GameOver Menu")]
+    [SerializeField] private Image _gameOverPanel;
+    [SerializeField] private GameOverMenuUIElements _gameOverUIElements;
+
     [Header("Audio Scriptable Object")]
     [SerializeField] private AudioDataScriptableObject _audioDataScriptableObject;
 
@@ -73,6 +77,18 @@ public class UIManager : SingletonPersistent<UIManager>
         [Header("Options Slider", order = 2)]
         [SerializeField] public Slider BgmSlider;
         [SerializeField] public Slider SfxSlider;
+    }
+
+    [Serializable]
+    public struct GameOverMenuUIElements
+    {
+        [Header("Game Over Retry Button", order = 2)]
+        [SerializeField] public Button RetryButton;
+        [SerializeField] public TextMeshProUGUI RetryText;
+
+        [Header("Game Over Back Button", order = 2)]
+        [SerializeField] public Button BackButton;
+        [SerializeField] public TextMeshProUGUI BackText;
     }
 
     [Serializable]
@@ -226,7 +242,13 @@ public class UIManager : SingletonPersistent<UIManager>
 
     public GameObject GetGameOverScreen()
     {
-        return _mainMenuPanel.gameObject;
+        return _gameOverPanel.gameObject;
+    }
+
+    public void PauseScreen()
+    {
+        _pauseMenuPanel.gameObject.SetActive(true);
+        _gameStateData.PauseGame();
     }
 }
 

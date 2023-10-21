@@ -36,6 +36,16 @@ public class GameStateDataScriptableObject : ScriptableObject
         });
     }
 
+    public void UnPauseGame()
+    {
+        UpdateCurrentGameState(GameState.IsPlaying);
+    }
+
+    public void PauseGame()
+    {
+        UpdateCurrentGameState(GameState.IsPaused);
+    }
+
     public void RespawnCharacter()
     {
         CurrentPlayerLives--;

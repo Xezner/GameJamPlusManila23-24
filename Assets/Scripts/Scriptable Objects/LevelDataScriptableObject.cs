@@ -6,14 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelDataScriptableObject", menuName = "Scriptable Objects/Level Data Scriptable Object")]
 public class LevelDataScriptableObject : ScriptableObject
 {
-    [Header("Save Data Scriptable Object")]
-    [SerializeField] private SaveDataScriptableObject _saveData;
-
     [Header("Ftue Data ScriptableObject")]
     [SerializeField] private FTUEDataScriptableObject _ftueData;
 
     [Header("Game State Data Scriptable Object")]
     [SerializeField] private GameStateDataScriptableObject _gameStateData;
+
+    private LevelData _nextLevelData;
 
     public List<LevelData> LevelDataList = new();
 
@@ -50,8 +49,10 @@ public class LevelDataScriptableObject : ScriptableObject
         }
         OnLevelFinish?.Invoke(this, new OnLevelFinishEventArgs
         {
-            LevelData = LevelDataList[level++]
+            LevelData = _gameStateData.CurrentLevelData
         });
+
+        _nextLevelData = LevelDataList?[level + 1];
     }
 }
 

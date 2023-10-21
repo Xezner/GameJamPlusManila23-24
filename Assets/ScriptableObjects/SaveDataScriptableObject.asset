@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae54a157039889f44858040e6d60ad4d, type: 3}
   m_Name: SaveDataScriptableObject
   m_EditorClassIdentifier: 
+  SaveData:
+    CurrentLevel: 0
+    LevelsUnlocked: 0
+  LevelData: []

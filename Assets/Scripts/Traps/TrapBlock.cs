@@ -5,17 +5,26 @@ using UnityEngine;
 public class TrapBlock : MonoBehaviour
 {
     [SerializeField] private GameStateDataScriptableObject _gameState;
-
-    private float _timeDelay = 1f;
+    private float _timeDelay = 0.6f;
     private bool _isDead = false;
+
+    private void OnEnable()
+    {
+        _gameState.OnCharacterRespawn += Instance_OnCharacterRespawn;
+    }
+
+    private void Instance_OnCharacterRespawn(object sender, GameStateDataScriptableObject.OnCharacterRespawnEventArgs e)
+    {
+        Debug.Log("test");
+        StartCoroutine(StartDelay());
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(_isDead)
         {
             return;
         }
-
-        Debug.Log("Dead");
         _isDead = true;
 
         if (_gameState.CurrentPlayerLives > 0)
@@ -24,28 +33,23 @@ public class TrapBlock : MonoBehaviour
         }
         else
         {
-            gameObject.GetComponent<Collider2D>().enabled = false;
             _gameState.UpdateCurrentGameState(GameState.IsGameOver);
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (_isDead)
-        {
-            StartCoroutine(StartDelay());
-        }
-    }
-
-
     private IEnumerator StartDelay()
     {
-        while(_timeDelay > 0)
+        while (_timeDelay > 0)
         {
-            _timeDelay-= Time.deltaTime;
+            _timeDelay -= Time.deltaTime;
             yield return null;
         }
-        _timeDelay = 5;
+        _timeDelay = 0.6f;
         _isDead = false;
+    }
+
+    private void OnDisable()
+    {
+        _gameState.OnCharacterRespawn -= Instance_OnCharacterRespawn;
     }
 }

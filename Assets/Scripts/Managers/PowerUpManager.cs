@@ -45,6 +45,10 @@ public class PowerUpManager : MonoBehaviour
         {
             _powerUpState.TransformBallSize(false);
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Instance.PauseScreen();
+        }
     }
 
     private void Instance_OnTransformChanged(object sender, PowerUpStateScriptableObject.OnTransformChangedEventArgs onTransformChangedEvent)

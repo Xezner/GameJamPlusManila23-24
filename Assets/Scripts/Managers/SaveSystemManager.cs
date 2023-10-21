@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveSystemManager : MonoBehaviour
+public class SaveSystemManager : SingletonPersistent<SaveSystemManager>
 {
     [Header("Level Data Scriptable Object")]
     [SerializeField] private LevelDataScriptableObject _levelData;
@@ -17,10 +17,12 @@ public class SaveSystemManager : MonoBehaviour
 
     private void Instance_OnLevelFinish(object sender, LevelDataScriptableObject.OnLevelFinishEventArgs levelUpdateEvent)
     {
-        int levelFinished = levelUpdateEvent.LevelData.Level;
-        int currentLevelsUnlocked = _saveData.SaveData.LevelsUnlocked;
+        _saveData.AddSaveData(levelUpdateEvent.LevelData);
 
-        _saveData.SaveData.CurrentLevel = levelFinished;
-        _saveData.SaveData.LevelsUnlocked = levelFinished > currentLevelsUnlocked ? levelFinished : currentLevelsUnlocked;
+        //int levelFinished = levelUpdateEvent.LevelData.Level;
+        //int currentLevelsUnlocked = _saveData.SaveData.LevelsUnlocked;
+
+        //_saveData.SaveData.CurrentLevel = levelFinished;
+        //_saveData.SaveData.LevelsUnlocked = levelFinished > currentLevelsUnlocked ? levelFinished : currentLevelsUnlocked;
     }
 }

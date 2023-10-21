@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
     //Gravity
     private GravityData _gravityData;
     private bool _isGravityChanged = false;
-    private float _groundingForce;
 
     //Bounce Amplify;
     private bool _isBounceAmplified = false;
@@ -78,10 +77,13 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         if(_gameState.CurrentGameState != GameState.IsPlaying)
         {
-            Debug.Log("Not palying");
+            _rigidBody.bodyType = RigidbodyType2D.Static;
             return;
         }
-
+        else
+        {
+            _rigidBody.bodyType = RigidbodyType2D.Dynamic;
+        }
         _time += Time.deltaTime;
 
         GatherInput();
@@ -121,6 +123,9 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     IEnumerator RespawnPosition(Vector3 position)
     {
+        _powerUpState.ReverseGravity(false);
+        _powerUpState.TransformBallSize(false);
+
         float timer = 0.5f;
         while(timer > 0)
         {
@@ -128,13 +133,15 @@ public class PlayerController : MonoBehaviour, IPlayerController
             yield return null;
         }
         transform.position = position;
-        timer = 0.5f;
+        timer = 0.8f;
         while (timer > 0)
         {
             timer -= Time.deltaTime;
             yield return null;
         }
         _isControlsEnabled = true;
+
+
     }
     #endregion
 
