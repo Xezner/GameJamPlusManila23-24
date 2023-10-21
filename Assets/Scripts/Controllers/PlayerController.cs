@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private Vector2 _frameVelocity;
     private bool _cachedQueryStartInColliders;
 
-    private const string JUMP = "JUMP";
-    private const string HORIZONTAL = "HORIZONTAL";
-    private const string VERTICAL = "VERTICAL";
+    private const string JUMP = "Jump";
+    private const string HORIZONTAL = "Horizontal";
+    private const string VERTICAL = "Vertical";
 
     #region Interface
 

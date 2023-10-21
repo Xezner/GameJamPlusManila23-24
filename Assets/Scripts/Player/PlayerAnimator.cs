@@ -29,8 +29,7 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Audio Source")]
     [SerializeField] private AudioSource _source;
 
-    [Header("Player Controller")]
-    [SerializeField] private IPlayerController _player;
+    private IPlayerController _player;
 
     private bool _grounded;
     private ParticleSystem.MinMaxGradient _currentGradient;
@@ -38,6 +37,11 @@ public class PlayerAnimator : MonoBehaviour
     private const string GROUND_KEY = "Grounded";
     private const string IDLE_SPEED_KEY = "IdleSpeed";
     private const string JUMP_KEY = "Jump";
+
+    private void Awake()
+    {
+        _player = GetComponentInParent<IPlayerController>();
+    }
 
     private void OnEnable()
     {
@@ -110,7 +114,7 @@ public class PlayerAnimator : MonoBehaviour
             SetColor(_landParticles);
 
             _animator.SetTrigger(GroundedKey);
-            _source.PlayOneShot(_footsteps[Random.Range(0, _footsteps.Length)]);
+            //_source.PlayOneShot(_footsteps[Random.Range(0, _footsteps.Length)]);
             _moveParticles.Play();
 
             _landParticles.transform.localScale = Vector3.one * Mathf.InverseLerp(0, 40, impact);
