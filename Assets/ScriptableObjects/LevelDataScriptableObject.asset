@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e510b90fe8d0946abdb58a7dd2199a, type: 3}
   m_Name: LevelDataScriptableObject
   m_EditorClassIdentifier: 
+  _saveData: {fileID: 11400000, guid: 654843ff752686b43bfe54f33c8e3ef5, type: 2}
+  _ftueData: {fileID: 11400000, guid: ef568dd9def83c449a67e304e18e0eec, type: 2}
+  _gameStateData: {fileID: 11400000, guid: 6e94f0aa9503ad6489efdc62f3f8b712, type: 2}
   LevelDataList:
   - Level: 0
     Score: 0
+    StartingPoint: {fileID: 0}
+  - Level: 1
+    Score: 0
+    StartingPoint: {fileID: 0}

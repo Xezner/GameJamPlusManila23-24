@@ -10,7 +10,7 @@ public class BuildSceneManager : SingletonPersistent<BuildSceneManager>
 {
     //Scriptable Object to contain data for transition
     [SerializeField] private TransitionScriptableObject _transitionScriptableObject;
-    private GameObject _transitionPanel;
+    [SerializeField] private GameObject _transitionPanel;
 
     //Called to set the transition panel to be played
     public void SetTransitionPanel(GameObject transitionObject)
@@ -19,10 +19,10 @@ public class BuildSceneManager : SingletonPersistent<BuildSceneManager>
     }
 
     //Restarts transition and loads the scene async
-    public void LoadSceneAsync(BuildScene buildScene)
+    public void LoadSceneAsync(int sceneNumber)
     {
         _transitionPanel.SetActive(false);
-        StartCoroutine(LoadAsync(buildScene));
+        StartCoroutine(LoadAsync((BuildScene)sceneNumber));
     }
 
     //Wait for the half of the transition time before loading the scene
@@ -43,6 +43,6 @@ public class BuildSceneManager : SingletonPersistent<BuildSceneManager>
 public enum BuildScene
 {
     MainMenuScene = 0,
-    GameScene = 1,
-    FTUEScene = 2,
+    FTUEScene = 1,
+    LevelOne = 2,
 }
