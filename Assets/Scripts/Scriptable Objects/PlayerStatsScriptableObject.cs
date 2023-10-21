@@ -71,7 +71,37 @@ public class PlayerStatsScriptableObject : ScriptableObject
 
     public void ResetValues(PlayerStatsScriptableObject defaultPlayerStats)
     {
+        //Layer
         PlayerLayer = defaultPlayerStats.PlayerLayer;
 
+        //Input
+        SnapInput = defaultPlayerStats.SnapInput;
+        VerticalDeadZoneThreshold = defaultPlayerStats.VerticalDeadZoneThreshold;
+        HorizontalDeadZoneThreshold = defaultPlayerStats.HorizontalDeadZoneThreshold;
+
+        //Movement
+        DefaultMaxSpeed = defaultPlayerStats.DefaultMaxSpeed;
+        MaxSpeed = defaultPlayerStats.MaxSpeed;
+        Acceleration = defaultPlayerStats.Acceleration;
+        GroundDeceleration = defaultPlayerStats.GroundDeceleration;
+        AirDeceleration = defaultPlayerStats.AirDeceleration;
+        GroundingForce = defaultPlayerStats.GroundingForce;
+        GroundingForceBigBall = defaultPlayerStats.GroundingForceBigBall;
+        GrounderDistance = defaultPlayerStats.GrounderDistance;
+
+        //JUMP
+        JumpPower = defaultPlayerStats.JumpPower;
+        MaxFallSpeed = defaultPlayerStats.MaxFallSpeed;
+        FallAcceleration = defaultPlayerStats.FallAcceleration;
+        JumpEndEarlyGravityModifier = defaultPlayerStats.JumpEndEarlyGravityModifier;
+        CoyoteTime = defaultPlayerStats.CoyoteTime;
+        JumpBuffer = defaultPlayerStats.JumpBuffer;
+
+        //Bounce
+        HeightPercentageMultiplier = defaultPlayerStats.HeightPercentageMultiplier;
+        BounceDecayMultiplier = defaultPlayerStats.BounceDecayMultiplier;
+
+        //Ground
+        GroundPosition = defaultPlayerStats.GroundPosition;
     }
 }
