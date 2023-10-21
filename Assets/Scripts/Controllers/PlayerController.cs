@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     [Header("Player Components")]
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private CapsuleCollider2D _collider;
-
+    [SerializeField] private SpriteRenderer _bounceSprite;
     private FrameInput _frameInput;
     private Vector2 _frameVelocity;
     private bool _cachedQueryStartInColliders;
@@ -74,7 +74,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private void Instance_OnGravityReversed(object sender, PowerUpStateScriptableObject.OnGravityReversedEventArgs onGravityReversedEvent)
     {
         _gravityData = onGravityReversedEvent.GravityData;
-        transform.rotation = Quaternion.Euler(onGravityReversedEvent.GravityData.Rotation);
+        transform.rotation = Quaternion.Euler(_gravityData.Rotation);
+        _bounceSprite.flipY = _gravityData.IsGravityReversed;
         _isGravityChanged = true;
     }
 
