@@ -65,4 +65,6 @@ public class LevelData
     public int Score;
     public Transform StartingPoint;
     public int StartingLives = 3;
+
+    public PlayerStatsScriptableObject DefaultValues;
 }

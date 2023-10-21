@@ -12,6 +12,8 @@ public class GameStateManager : SingletonPersistent<GameStateManager>
     [Header("Level Data Scriptable Object")]
     [SerializeField] private LevelDataScriptableObject _levelData;
 
+    [SerializeField] private PlayerStatsScriptableObject _playerStats;
+
     [SerializeField] private GameState _currentGameState;
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,7 @@ public class GameStateManager : SingletonPersistent<GameStateManager>
     {
         _gameStateData.CurrentPlayerLives = onLevelStart.LevelData.StartingLives;
         _gameStateData.CurrentLevelData = onLevelStart.LevelData;
+        _playerStats.ResetValues(onLevelStart.LevelData.DefaultValues);
     }
 }
 
