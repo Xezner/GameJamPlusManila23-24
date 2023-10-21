@@ -15,10 +15,14 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private CapsuleCollider2D _collider;
     [SerializeField] private GameObject _bounceGameObject;
 
+    //Speed buff
+    private float _speedBuffTimer;
+
     // Start is called before the first frame update
     void Start()
     {
         _powerUpState.OnTransformChanged += Instance_OnTransformChanged;
+        _powerUpState.OnSpeedBlockBuff += Instance_OnSpeedBlockBuff;
     }
 
    
@@ -49,6 +53,35 @@ public class PowerUpManager : MonoBehaviour
         _bounceGameObject.transform.localScale = onTransformChangedEvent.TransformData.NewSize;
         _playerStats.GroundingForce = onTransformChangedEvent.TransformData.GroundingForce;
     }
+
+    private void Instance_OnSpeedBlockBuff(object sender, PowerUpStateScriptableObject.OnSpeedBlockBuffEventArgs onSpeedBlockBuffEvent)
+    {
+        SuperSpeedData SpeedData = onSpeedBlockBuffEvent.SpeedData;
+        if (_speedBuffTimer <= 0f)
+        {
+            _speedBuffTimer = SpeedData.Duration;
+            _playerStats.MaxSpeed = SpeedData.MaxSpeed;
+            StartCoroutine(StartSpeedBuff());
+        }
+        else
+        {
+            _speedBuffTimer = SpeedData.Duration;
+        }
+    }
+
+    private IEnumerator StartSpeedBuff()
+    {
+        _playerStats.SnapInput = true;
+        while (_speedBuffTimer > 0f)
+        {
+            _speedBuffTimer -= Time.deltaTime;
+            yield return null;
+        }
+        _speedBuffTimer = 0f;
+        _playerStats.SnapInput = false;
+        _playerStats.MaxSpeed = _playerStats.DefaultMaxSpeed;
+        
+    }
 }
 
 
@@ -77,4 +110,12 @@ public struct TransformData
 {
     public Vector3 NewSize;
     public float GroundingForce;
+    public bool IsNormalSize;
+}
+
+[Serializable]
+public struct SuperSpeedData
+{
+    public float MaxSpeed;
+    public float Duration;
 }
