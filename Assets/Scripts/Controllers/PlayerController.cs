@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateDataScriptableObject _gameState;
 
+    //Level Data Scriptable Object here
+
     [Header("Player Components")]
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private CapsuleCollider2D _collider;
@@ -60,6 +62,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _powerUpState.OnBounceAmplify += Instance_OnBounceAmplify;
         _powerUpState.OnTransformChanged += Instance_OnTransformChanged;
         _powerUpState.OnEnterWater += Instance_OnEnterWater;
+
+        _gameState.OnCharacterRespawn += Instance_OnCharacterRespawn;
     }
     private void Awake()
     {
@@ -100,6 +104,13 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private void Instance_OnEnterWater(object sender, PowerUpStateScriptableObject.OnEnterWaterEventArgs onEnterWaterEvent)
     {
         _isOnWater = onEnterWaterEvent.IsOnWater;
+    }
+
+    private void Instance_OnCharacterRespawn(object sender, EventArgs e)
+    {
+        BuildSceneManager.Instance.PlayTransitionScreen();
+        //Add reset values;
+        //Reset player position
     }
 
     #endregion
@@ -349,5 +360,6 @@ public interface IPlayerController
     public event Action<bool, float> GroundedChanged;
 
     public event Action Jumped;
+
     public Vector2 FrameInput { get; }
 }

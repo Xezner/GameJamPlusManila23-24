@@ -9,12 +9,16 @@ public class GameStateManager : SingletonPersistent<GameStateManager>
     [Header("Game State Data Scriptable Object")]
     [SerializeField] private GameStateDataScriptableObject _gameStateData;
 
+    [Header("Level Data Scriptable Object")]
+    [SerializeField] private LevelDataScriptableObject _levelData;
+
     [SerializeField] private GameState _currentGameState;
     // Start is called before the first frame update
     void Start()
     {
         //Subscribe to the event OnGameStateChanged
         _gameStateData.OnGameStateChanged += Instance_OnGameStateChanged;
+        _levelData.OnLevelStart += Instance_OnLevelStart;
     }
 
     // Update is called once per frame
@@ -26,10 +30,10 @@ public class GameStateManager : SingletonPersistent<GameStateManager>
         }
         if(_currentGameState == GameState.IsGameOver)
         {
-            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-            BuildSceneManager.Instance.LoadSceneAsync(1);
-            _gameStateData.CurrentGameState = GameState.IsPlaying;
-            _currentGameState = GameState.IsPlaying;
+            Debug.Log("Game Over");
+            _gameStateData.GameOver();
+            _gameStateData.UpdateCurrentGameState(GameState.IsPaused);
+            //BuildSceneManager.Instance.LoadSceneAsync(BuildScene.);
         }
     }
 
@@ -38,6 +42,11 @@ public class GameStateManager : SingletonPersistent<GameStateManager>
     {
         _currentGameState = gameStateData.GameState;
     }
+
+    private void Instance_OnLevelStart(object sender, LevelDataScriptableObject.OnLevelStartEventArgs onLevelStart)
+    {
+        _gameStateData.CurrentPlayerLives = onLevelStart.LevelData.StartingLives;
+    }
 }
 
 [Serializable]
@@ -45,5 +54,7 @@ public enum GameState
 {
     IsPaused,
     IsPlaying,
-    IsGameOver
+    IsGameOver,
+    IsLoading,
+    IsRespawning
 }
