@@ -4960,12 +4960,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cf248f2234a1ba8408bb036618c01095, type: 3}
+  m_Sprite: {fileID: -1487085454, guid: 43706cd10e3ef7e458150955a79c2894, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -29539,7 +29539,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 6200000, guid: a2730107469c26545b77b84ae0470ad3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -29599,6 +29599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerStats: {fileID: 11400000, guid: 691b6ba613f115645be92bdd93db1a09, type: 2}
+  _powerUpState: {fileID: 11400000, guid: a10c9fa049ecc2b4d83db28d64bb8d78, type: 2}
   _rigidBody: {fileID: 3452551011384809448}
   _collider: {fileID: 2061495954107195887}
 --- !u!1 &8500131787079050779
