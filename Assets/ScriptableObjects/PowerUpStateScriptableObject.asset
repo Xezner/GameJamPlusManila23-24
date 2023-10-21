@@ -25,6 +25,11 @@ MonoBehaviour:
   NormalSizeData:
     NewSize: {x: 1, y: 1, z: 1}
     GroundingForce: -5
+    IsNormalSize: 1
   BigSizeData:
     NewSize: {x: 2, y: 2, z: 2}
     GroundingForce: -10
+    IsNormalSize: 0
+  SuperSpeedData:
+    MaxSpeed: 35
+    Duration: 5
