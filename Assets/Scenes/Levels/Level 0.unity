@@ -175,6 +175,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MANAGER_PowerUpStateManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8957316511774402997, guid: cbb32f634245eff4b9778f9b9f356950, type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 568821264}
+    - target: {fileID: 8957316511774402997, guid: cbb32f634245eff4b9778f9b9f356950, type: 3}
+      propertyPath: _bounceGameObject
+      value: 
+      objectReference: {fileID: 568821263}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -888,6 +896,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
+--- !u!1 &568821263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8500131787079050779, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
+  m_PrefabInstance: {fileID: 568821262}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &568821264 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2061495954107195887, guid: 0a807d4214cfa6e4382bc590bf327d7e, type: 3}
+  m_PrefabInstance: {fileID: 568821262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1271596568
 GameObject:
   m_ObjectHideFlags: 0

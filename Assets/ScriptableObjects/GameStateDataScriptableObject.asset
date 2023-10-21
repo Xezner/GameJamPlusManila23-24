@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameStateDataScriptableObject
   m_EditorClassIdentifier: 
   CurrentGameState: 1
+  CurrentPlayerLives: 2

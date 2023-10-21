@@ -223,5 +223,10 @@ public class UIManager : SingletonPersistent<UIManager>
         _optionMenuUIElements.BgmSlider.value = _audioDataScriptableObject.BGMVolume;
         _optionMenuUIElements.SfxSlider.value = _audioDataScriptableObject.SFXVolume;
     }
+
+    public GameObject GetGameOverScreen()
+    {
+        return _mainMenuPanel.gameObject;
+    }
 }
 

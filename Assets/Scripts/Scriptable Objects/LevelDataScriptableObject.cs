@@ -33,7 +33,7 @@ public class LevelDataScriptableObject : ScriptableObject
 
     public void GetCurrentLevelData(int level)
     {
-        _gameStateData.CurrentGameState = GameState.IsPlaying;
+        _gameStateData.UpdateCurrentGameState(GameState.IsPlaying);
         OnLevelStart?.Invoke(this, new OnLevelStartEventArgs
         {
             LevelData = LevelDataList[level]
@@ -64,4 +64,5 @@ public class LevelData
     public int Level;
     public int Score;
     public Transform StartingPoint;
+    public int StartingLives = 3;
 }

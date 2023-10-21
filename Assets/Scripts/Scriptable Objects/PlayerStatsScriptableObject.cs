@@ -68,4 +68,10 @@ public class PlayerStatsScriptableObject : ScriptableObject
 
     [Header("Ground")]
     public float GroundPosition = -2.6f;
+
+    public void ResetValues(PlayerStatsScriptableObject defaultPlayerStats)
+    {
+        PlayerLayer = defaultPlayerStats.PlayerLayer;
+
+    }
 }

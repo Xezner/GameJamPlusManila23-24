@@ -25,6 +25,19 @@ public class BuildSceneManager : SingletonPersistent<BuildSceneManager>
         StartCoroutine(LoadAsync((BuildScene)sceneNumber));
     }
 
+    public void PlayTransitionScreen()
+    {
+        _transitionPanel.SetActive(false);
+        _transitionPanel.SetActive(true);
+    }
+
+    public void OpenUIScreen(GameObject uiScreen)
+    {
+        _transitionPanel.SetActive(false);
+        StartCoroutine(LoadAsync(uiScreen));
+        
+    }
+
     //Wait for the half of the transition time before loading the scene
     private IEnumerator LoadAsync(BuildScene buildScene)
     {
@@ -36,6 +49,18 @@ public class BuildSceneManager : SingletonPersistent<BuildSceneManager>
             yield return null;
         }
         SceneManager.LoadSceneAsync((int)buildScene, LoadSceneMode.Single);
+    }
+
+    private IEnumerator LoadAsync(GameObject gameObject)
+    {
+        _transitionPanel.SetActive(true);
+        float elapsedTime = 0f;
+        while (elapsedTime < _transitionScriptableObject.TransitionTime)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        gameObject.SetActive(true);
     }
 }
 
