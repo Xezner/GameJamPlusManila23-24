@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static GameStateDataScriptableObject;
 
 [SelectionBase]
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
@@ -42,6 +43,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
     //Water
     private bool _isOnWater = false;
 
+    private bool _isControlsEnabled = true;
+
     private const string JUMP = "Jump";
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
@@ -80,6 +83,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         }
 
         _time += Time.deltaTime;
+
         GatherInput();
     }
 
@@ -106,18 +110,43 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _isOnWater = onEnterWaterEvent.IsOnWater;
     }
 
-    private void Instance_OnCharacterRespawn(object sender, EventArgs e)
+    private void Instance_OnCharacterRespawn(object sender, OnCharacterRespawnEventArgs onCharacterRespawnEvent)
     {
+        _isControlsEnabled = false;
         BuildSceneManager.Instance.PlayTransitionScreen();
         //Add reset values;
+        StartCoroutine(RespawnPosition(onCharacterRespawnEvent.LevelData.StartingPoint.position));
         //Reset player position
     }
 
+    IEnumerator RespawnPosition(Vector3 position)
+    {
+        float timer = 0.5f;
+        while(timer > 0)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        transform.position = position;
+        timer = 0.5f;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        _isControlsEnabled = true;
+    }
     #endregion
 
 
     private void GatherInput()
     {
+        if(!_isControlsEnabled)
+        {
+            _frameInput = new();
+            return;
+        }
+
         _frameInput = new FrameInput
         {
             JumpDown = Input.GetButtonDown(JUMP) || Input.GetKeyDown(KeyCode.C),
@@ -346,6 +375,16 @@ public class PlayerController : MonoBehaviour, IPlayerController
         }
     }
 
+
+    private void OnDisable()
+    {
+        _powerUpState.OnGravityReversed -= Instance_OnGravityReversed;
+        _powerUpState.OnBounceAmplify -= Instance_OnBounceAmplify;
+        _powerUpState.OnTransformChanged -= Instance_OnTransformChanged;
+        _powerUpState.OnEnterWater -= Instance_OnEnterWater;
+
+        _gameState.OnCharacterRespawn -= Instance_OnCharacterRespawn;
+    }
 }
 
 public struct FrameInput

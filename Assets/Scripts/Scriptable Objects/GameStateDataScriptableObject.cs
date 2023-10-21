@@ -9,6 +9,7 @@ public class GameStateDataScriptableObject : ScriptableObject
 {
     public GameState CurrentGameState;
     public int CurrentPlayerLives;
+    public LevelData CurrentLevelData;
 
     //Event handler for OnGameStateChanged
     public event EventHandler<OnGameStateChangedEventArgs> OnGameStateChanged;
@@ -17,7 +18,13 @@ public class GameStateDataScriptableObject : ScriptableObject
         public GameState GameState;
     }
     
-    public event EventHandler OnCharacterRespawn;
+    public event EventHandler<OnCharacterRespawnEventArgs> OnCharacterRespawn;
+
+    public class OnCharacterRespawnEventArgs
+    {
+        public LevelData LevelData;
+    }
+    
 
     //Call this function when you want to trigger the event
     public void UpdateCurrentGameState(GameState gameState)
@@ -32,7 +39,10 @@ public class GameStateDataScriptableObject : ScriptableObject
     public void RespawnCharacter()
     {
         CurrentPlayerLives--;
-        OnCharacterRespawn?.Invoke(this, EventArgs.Empty);  
+        OnCharacterRespawn?.Invoke(this, new OnCharacterRespawnEventArgs
+        {
+            LevelData = CurrentLevelData
+        });  
         //Animate Death before playing transition screen
         //BuildSceneManager.Instance.PlayTransitionScreen();
         //respawn the character

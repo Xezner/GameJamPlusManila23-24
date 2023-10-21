@@ -45,8 +45,6 @@ public class PowerUpManager : MonoBehaviour
         {
             _powerUpState.TransformBallSize(false);
         }
-
-        Debug.Log(_playerStats.JumpPower);
     }
 
     private void Instance_OnTransformChanged(object sender, PowerUpStateScriptableObject.OnTransformChangedEventArgs onTransformChangedEvent)
@@ -84,6 +82,12 @@ public class PowerUpManager : MonoBehaviour
         _playerStats.SnapInput = false;
         _playerStats.MaxSpeed = _playerStats.DefaultMaxSpeed;
         
+    }
+
+    private void OnDisable()
+    {
+        _powerUpState.OnTransformChanged -= Instance_OnTransformChanged;
+        _powerUpState.OnSpeedBlockBuff -= Instance_OnSpeedBlockBuff;
     }
 }
 
