@@ -15,7 +15,7 @@ MonoBehaviour:
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 0
-  SnapInput: 1
+  SnapInput: 0
   VerticalDeadZoneThreshold: 0.3
   HorizontalDeadZoneThreshold: 0.1
   MaxSpeed: 14
@@ -33,4 +33,4 @@ MonoBehaviour:
   JumpBuffer: 0.2
   HeightPercentageMultiplier: 0.3
   BounceDecayMultiplier: 0.6
-  GroundPosition: -2.6
+  GroundPosition: -100
