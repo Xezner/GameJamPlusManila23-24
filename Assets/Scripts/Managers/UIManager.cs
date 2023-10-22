@@ -322,8 +322,8 @@ public class UIManager : SingletonPersistent<UIManager>
 
     private void SetGameOverMenuButtons()
     {
-        Sprite optionsButton = _isFtueOver ? _mainMenuUIData.HamsterOptionButton: _mainMenuUIData.BounceOptionButton;
-        SetButton(_levelCompleteUIElements.OptionsButton, optionsButton);
+        //Sprite optionsButton = _isFtueOver ? _mainMenuUIData.HamsterOptionButton: _mainMenuUIData.BounceOptionButton;
+        //SetButton(_levelCompleteUIElements.OptionsButton, optionsButton);
 
         Sprite nextLevelButton = _isFtueOver ? _mainMenuUIData.HamsterPlayButton : _mainMenuUIData.BouncePlayButton;
         SetButton(_levelCompleteUIElements.NextButton, nextLevelButton);
