@@ -15,7 +15,6 @@ public class TrapBlock : MonoBehaviour
 
     private void Instance_OnCharacterRespawn(object sender, GameStateDataScriptableObject.OnCharacterRespawnEventArgs e)
     {
-        Debug.Log("test");
         StartCoroutine(StartDelay());
     }
 
