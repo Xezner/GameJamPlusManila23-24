@@ -7,11 +7,13 @@ public class RingManager : Singleton<RingManager>
 {
     [SerializeField] private List<RingBlock> _ringBlocks;
     [SerializeField] private GoalBlock _goalBlock;
+    [SerializeField] private GameStateDataScriptableObject _gameState;
     private int _ringBlocksCount;
     // Start is called before the first frame update
     void Start()
     {
         _ringBlocksCount = _ringBlocks.Count;
+        _gameState.RingBlocksCount = _ringBlocksCount;
     }
 
     // Update is called once per frame
@@ -48,10 +50,6 @@ public class RingManager : Singleton<RingManager>
         {
             _goalBlock.UnlockGoal();
         }
-    }
-
-    public int GetBlockCount()
-    {
-            return _ringBlocksCount;
+        _gameState.RingBlocksCount = _ringBlocksCount;
     }
 }

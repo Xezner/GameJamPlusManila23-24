@@ -151,9 +151,7 @@ public class UIManager : SingletonPersistent<UIManager>
 #if UNITY_WEBGL
             _exitButton.gameObject.SetActive(false);
 #endif
-        UpdateUIOnFTUEData();
-
-        
+        UpdateUIOnFTUEData();   
     }
 
     private bool _isFtueOver;

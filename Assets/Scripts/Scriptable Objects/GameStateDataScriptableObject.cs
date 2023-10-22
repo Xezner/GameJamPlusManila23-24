@@ -10,6 +10,7 @@ public class GameStateDataScriptableObject : ScriptableObject
     public GameState CurrentGameState;
     public int CurrentPlayerLives;
     public LevelData CurrentLevelData;
+    public int RingBlocksCount;
 
     //Event handler for OnGameStateChanged
     public event EventHandler<OnGameStateChangedEventArgs> OnGameStateChanged;

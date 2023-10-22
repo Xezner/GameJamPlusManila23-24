@@ -22,8 +22,9 @@ public class AudioDataScriptableObject : ScriptableObject
     [Serializable]
     public struct AudioClips
     {
-        public AudioClip FootStepSFX;
-        public AudioClip SlashSFX;
+        public AudioClip[] JumpSFX;
+        public AudioClip DeathSFX;
+        public AudioClip GameOverSFX;
         //add more audio clips here
     }
 
