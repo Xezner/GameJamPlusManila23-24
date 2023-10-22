@@ -56,6 +56,19 @@ public class LevelDataScriptableObject : ScriptableObject
 
         _nextLevelData = LevelDataList?[level + 1];
     }
+
+    public void StartNextLevel()
+    {
+        if(_nextLevelData.Level <= 3)
+        {
+            StartLevel(_nextLevelData.Level);
+            BuildSceneManager.Instance.LoadSceneAsync(_nextLevelData.Level + 1);
+        }
+        else
+        {
+            BuildSceneManager.Instance.LoadSceneAsync(0);
+        }
+    }
 }
 
 

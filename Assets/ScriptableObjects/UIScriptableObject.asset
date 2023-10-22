@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: UIScriptableObject
   m_EditorClassIdentifier: 
   GameLogo: {fileID: 21300000, guid: 424d05a69ed25e2469db825179704cb4, type: 3}
-  GameTitle: 
-  LayoutSpacing: 10
+  BounceLogo: {fileID: 21300000, guid: caa331ef40c7fb4429e840cb5622d431, type: 3}
+  HamsterLogo: {fileID: 21300000, guid: 747830cf0adc5154fa4d7b5c995e9b30, type: 3}
+  GameTitle: Bounce ++
+  LayoutSpacing: 20
   IsWidthSizeControlled: 1
   IsHeightSizeControlled: 1
   GeneralButtonSprite: {fileID: 21300000, guid: 8a66a9a2554ca3c438cf1fbed7a1b3a0, type: 3}
@@ -22,6 +24,30 @@ MonoBehaviour:
     TextColor: {r: 1, g: 1, b: 1, a: 1}
     FontSize: 25
     Font: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  MainMenuBackground: {fileID: 21300000, guid: 1a720abd46055c443879398646f042b4, type: 3}
-  OptionsMenuBackground: {fileID: 21300000, guid: 1a720abd46055c443879398646f042b4, type: 3}
-  CreditsBackground: {fileID: 21300000, guid: 1a720abd46055c443879398646f042b4, type: 3}
+  BounceColor: {r: 1, g: 0.5372549, b: 0.20000002, a: 1}
+  BounceColorPressed: {r: 0.90588236, g: 0.3929378, b: 0.22352938, a: 1}
+  HamsterColor: {r: 0.97647065, g: 0.8705883, b: 0.5803922, a: 1}
+  HamsterColorPressed: {r: 0.9058824, g: 0.73333335, b: 0.30588236, a: 1}
+  BounceContainer: {fileID: 21300000, guid: e863369e20b13a94f88c13017e31b8cc, type: 3}
+  HamsterContainer: {fileID: 21300000, guid: be5a50731bdd1f64f8f8072d1b949c0d, type: 3}
+  BounceSettingsButton: {fileID: 21300000, guid: d2f18d84ab73bbf40bac9bb667060ece, type: 3}
+  HamsterSettingsButton: {fileID: 21300000, guid: e3c2135a3af45574695a26f46d551163, type: 3}
+  BounceEndContainer: {fileID: 21300000, guid: 587caccd1f5069a46b9ea7e2f38141d9, type: 3}
+  HamsterEndContainer: {fileID: 21300000, guid: c9a6131e4b10f7e4993fea4b363c7a45, type: 3}
+  BounceOverlay: {fileID: 21300000, guid: c8d1431c18c56204da8e904acbf96fb5, type: 3}
+  HamsterOverlay: {fileID: 21300000, guid: 088a656e0204d244fbb00df08f14c0a7, type: 3}
+  BounceRetryButton: {fileID: 21300000, guid: e83a4c050ece33d41b71f9b05f885ed1, type: 3}
+  HamsterRetryButton: {fileID: 21300000, guid: 819fec8b463502048b79b51cde13192a, type: 3}
+  BounceHomeButton: {fileID: 21300000, guid: 3a0cedd5290f2db49b90cfd69d76ff46, type: 3}
+  HamsterHomeButton: {fileID: 21300000, guid: 1c1407bbf928b964da40696954cdc0c8, type: 3}
+  BounceOptionButton: {fileID: 21300000, guid: fbd84a69a8375794791e4bbe051fe38e, type: 3}
+  HamsterOptionButton: {fileID: 21300000, guid: 3969d9ea461912f4fb40f7a648cd11e4, type: 3}
+  BouncePlayButton: {fileID: 21300000, guid: 2ab7acdd6388af844a291baa41ad3c51, type: 3}
+  HamsterPlayButton: {fileID: 21300000, guid: 7960cf6f87ee3e64d8ac760109e60a09, type: 3}
+  BouncePauseButton: {fileID: 21300000, guid: 8f51231c367d52d488f03a067f582db8, type: 3}
+  HamsterPauseButton: {fileID: 21300000, guid: aacd1124a964ef940b4835991267b30b, type: 3}
+  BounceBackground: {fileID: 21300000, guid: 2679ccf2f36c4f24db04d2fdbbc6dc9d, type: 3}
+  HamsterBackground: {fileID: 21300000, guid: fd4b8aca32db50f4996fde8745552c40, type: 3}
+  MainMenuBackground: {fileID: 21300000, guid: fd4b8aca32db50f4996fde8745552c40, type: 3}
+  OptionsMenuBackground: {fileID: 21300000, guid: fd4b8aca32db50f4996fde8745552c40, type: 3}
+  CreditsBackground: {fileID: 21300000, guid: fd4b8aca32db50f4996fde8745552c40, type: 3}

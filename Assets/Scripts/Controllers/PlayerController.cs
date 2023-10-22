@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour, IPlayerController
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateDataScriptableObject _gameState;
 
+    [Header("Transition Data")]
+    [SerializeField] private TransitionScriptableObject _transitionData;
+
     [Header("FTUE Data")]
     [SerializeField] private FTUEDataScriptableObject _ftueData;
     [SerializeField] private Animator _playerAnimator;
@@ -157,14 +160,14 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _powerUpState.ReverseGravity(false);
         _powerUpState.TransformBallSize(false);
 
-        float timer = 0.5f;
+        float timer = _transitionData.TransitionTime;
         while(timer > 0)
         {
             timer -= Time.deltaTime;
             yield return null;
         }
         transform.position = position;
-        timer = 0.8f;
+        timer = _transitionData.TransitionTime + 0.5f;
         while (timer > 0)
         {
             timer -= Time.deltaTime;

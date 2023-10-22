@@ -18,7 +18,7 @@ public class SaveSystemManager : SingletonPersistent<SaveSystemManager>
     private void Instance_OnLevelFinish(object sender, LevelDataScriptableObject.OnLevelFinishEventArgs levelUpdateEvent)
     {
         _saveData.AddSaveData(levelUpdateEvent.LevelData);
-
+        UIManager.Instance.LevelClearScreen();
         //Add Level finished screen here
     }
 }

@@ -29601,6 +29601,7 @@ MonoBehaviour:
   _playerStats: {fileID: 11400000, guid: 691b6ba613f115645be92bdd93db1a09, type: 2}
   _powerUpState: {fileID: 11400000, guid: a10c9fa049ecc2b4d83db28d64bb8d78, type: 2}
   _gameState: {fileID: 11400000, guid: 6e94f0aa9503ad6489efdc62f3f8b712, type: 2}
+  _transitionData: {fileID: 11400000, guid: 5ff2ce4e3767d3543b84f8e09854f55d, type: 2}
   _ftueData: {fileID: 11400000, guid: ef568dd9def83c449a67e304e18e0eec, type: 2}
   _playerAnimator: {fileID: 5908374724628161824}
   _hamsterAnimator: {fileID: 22100000, guid: 385ddf6f22478ec4f956a62f9791c54d, type: 2}

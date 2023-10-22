@@ -62,8 +62,7 @@ public class GameStateDataScriptableObject : ScriptableObject
 
     public void GameOver()
     {
-        //Placeholder for gameover screen;
-        BuildSceneManager.Instance.OpenUIScreen(UIManager.Instance.GetGameOverScreen());
+        UIManager.Instance.GameOverScreen();
     }
 }
 

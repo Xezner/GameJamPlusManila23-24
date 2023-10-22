@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,10 +38,15 @@ public class UIManager : SingletonPersistent<UIManager>
     [Header("Pause Menu")]
     [SerializeField] private Image _pauseMenuPanel;
     [SerializeField] private PauseMenuButtons _pauseMenuButtons;
+    [SerializeField] private Button _pauseHudButton;
 
     [Header("GameOver Menu")]
     [SerializeField] private Image _gameOverPanel;
     [SerializeField] private GameOverMenuUIElements _gameOverUIElements;
+
+    [Header("LevelComplete Menu")]
+    [SerializeField] private Image _levelCompletePanel;
+    [SerializeField] private LevelCompleteUIElements _levelCompleteUIElements;
 
     [Header("Audio Scriptable Object")]
     [SerializeField] private AudioDataScriptableObject _audioDataScriptableObject;
@@ -79,7 +85,12 @@ public class UIManager : SingletonPersistent<UIManager>
 
         [Header("Options Slider", order = 2)]
         [SerializeField] public Slider BgmSlider;
+        [SerializeField] public Image BgmFill;
         [SerializeField] public Slider SfxSlider;
+        [SerializeField] public Image SfxFill;
+
+        [Header("Panels")]
+        [SerializeField] public Image ContainerPanel;
     }
 
     [Serializable]
@@ -92,6 +103,10 @@ public class UIManager : SingletonPersistent<UIManager>
         [Header("Game Over Back Button", order = 2)]
         [SerializeField] public Button BackButton;
         [SerializeField] public TextMeshProUGUI BackText;
+
+        [Header("Panels")]
+        [SerializeField] public Image ContainerPanel;
+        [SerializeField] public Image Overlay;
     }
 
     [Serializable]
@@ -108,26 +123,40 @@ public class UIManager : SingletonPersistent<UIManager>
         [Header("Pause Options Button", order = 2)]
         [SerializeField] public Button OptionsButton;
         [SerializeField] public TextMeshProUGUI OptionsText;
+
+        [Header("Pause Containers")]
+        [SerializeField] public Image Container;
     }
 
-    private void Start()
+    [Serializable]
+    public struct LevelCompleteUIElements
+    {
+        [Header("Level Complete Next Button", order = 2)]
+        [SerializeField] public Button NextButton;
+
+        [Header("Level Complete Home Button", order = 2)]
+        [SerializeField] public Button BackButton;
+
+        [Header("Level Complete Settings Button", order = 2)]
+        [SerializeField] public Button OptionsButton;
+
+        [Header("Panels")]
+        [SerializeField] public Image ContainerPanel;
+    }
+
+    private void OnEnable()
     {
 
         //turns off exit button if on unity_webgl
 #if UNITY_WEBGL
             _exitButton.gameObject.SetActive(false);
 #endif
-
         UpdateUIOnFTUEData();
 
-        SetMainMenuUI();
-
-        SetOptionsMenuUI();
-
-        SetPauseMenuUI();
-
-        SetGameOverMenuUI();
+        
     }
+
+    private bool _isFtueOver;
 
     // for testing purposes, disable this or comment this on final build
     private void Update()
@@ -137,25 +166,37 @@ public class UIManager : SingletonPersistent<UIManager>
             return;
         }
         UpdateUIOnFTUEData();
-        SetLayoutGroup(_verticalLayoutGroup, _mainMenuUIData.LayoutSpacing, _mainMenuUIData.IsHeightSizeControlled, _mainMenuUIData.IsWidthSizeControlled);
-        SetMainMenuButtons();
     }
 
     //Updates UI based on FTUE
     private void UpdateUIOnFTUEData()
-    { 
-        if(_ftueData.IsTutorialOver)
+    {
+        _isFtueOver = _ftueData.IsTutorialOver;
+        if (_isFtueOver)
         {
             _mainMenuUIElements.TutorialButton.gameObject.SetActive(false);
             _mainMenuUIElements.StartButton.gameObject.SetActive(true);
         }
+        SetMainMenuUI();
+
+        SetOptionsMenuUI();
+
+        SetPauseMenuUI();
+
+        SetGameOverMenuUI();
+
+        SetLevelCompleteMenuUI();
     }
 
     //Updates all main menu UI
     private void SetMainMenuUI()
     {
-        SetLogo(_gameLogo, _mainMenuUIData.GameLogo);
-        SetPanelBackground(_mainMenuPanel, _mainMenuUIData.MainMenuBackground);
+        Sprite titleLogo = _isFtueOver ? _mainMenuUIData.HamsterLogo : _mainMenuUIData.BounceLogo;
+        SetLogo(_gameLogo, titleLogo);
+
+        Sprite background = _isFtueOver ? _mainMenuUIData.HamsterBackground : _mainMenuUIData.BounceBackground;
+        SetPanelBackground(_mainMenuPanel, background);
+
         SetLayoutGroup(_verticalLayoutGroup, _mainMenuUIData.LayoutSpacing, _mainMenuUIData.IsHeightSizeControlled, _mainMenuUIData.IsWidthSizeControlled);
         SetMainMenuButtons();
     }
@@ -163,20 +204,60 @@ public class UIManager : SingletonPersistent<UIManager>
     //Updates all options menu UI
     private void SetOptionsMenuUI()
     {
-        SetPanelBackground(_optionsMenuPanel, _mainMenuUIData.OptionsMenuBackground);
-        SetButton(_optionMenuUIElements.OptionsExitButton, _optionMenuUIElements.OptionsExitText, _mainMenuUIData.GeneralButtonSprite, _mainMenuUIData.GeneralButtonTextData);
+        Sprite background = _isFtueOver ? _mainMenuUIData.HamsterBackground : _mainMenuUIData.BounceBackground;
+        SetPanelBackground(_optionsMenuPanel, background);
+
+        Color color = _isFtueOver ?
+                                    new(_mainMenuUIData.HamsterColor.r, _mainMenuUIData.HamsterColor.g, _mainMenuUIData.HamsterColor.b)
+                                  : new(_mainMenuUIData.BounceColor.r, _mainMenuUIData.BounceColor.g, _mainMenuUIData.BounceColor.b);
+
+        _optionMenuUIElements.BgmFill.color = color;
+        _optionMenuUIElements.SfxFill.color = color;
+
+        Sprite container = _isFtueOver ? _mainMenuUIData.HamsterContainer : _mainMenuUIData.BounceContainer;
+        SetPanelBackground(_optionMenuUIElements.ContainerPanel, container);
+
+        Sprite buttonSprite = _isFtueOver ? _mainMenuUIData.HamsterSettingsButton : _mainMenuUIData.BounceSettingsButton;
+        SetButton(_optionMenuUIElements.OptionsExitButton, buttonSprite);
     }
 
     private void SetPauseMenuUI()
     {
-                                              //replace with own background
-        SetPanelBackground(_pauseMenuPanel, _mainMenuUIData.MainMenuBackground);
+        //replace with own background
+        Sprite background = _isFtueOver ? _mainMenuUIData.HamsterBackground : _mainMenuUIData.BounceBackground;
+        SetPanelBackground(_pauseMenuPanel, background );
+
+        Sprite container = _isFtueOver ? _mainMenuUIData.HamsterContainer : _mainMenuUIData.BounceContainer;
+        SetPanelBackground(_pauseMenuButtons.Container, container);
+
+        Sprite pause = _isFtueOver ? _mainMenuUIData.HamsterPauseButton : _mainMenuUIData.BouncePauseButton;
+        SetButton(_pauseHudButton, pause); 
+
         SetPauseMenuButtons();
     }
 
     private void SetGameOverMenuUI()
     {                                      //replace with own background
-        SetPanelBackground(_gameOverPanel, _mainMenuUIData.MainMenuBackground);
+        Sprite background = _isFtueOver ? _mainMenuUIData.HamsterBackground : _mainMenuUIData.BounceBackground;
+        SetPanelBackground(_gameOverPanel, background);
+
+        Sprite container = _isFtueOver ? _mainMenuUIData.HamsterEndContainer : _mainMenuUIData.BounceEndContainer;
+        SetPanelBackground(_gameOverUIElements.ContainerPanel, container);
+
+        Sprite overlay = _isFtueOver ? _mainMenuUIData.HamsterOverlay : _mainMenuUIData.BounceOverlay;
+        SetPanelBackground(_gameOverUIElements.Overlay, overlay);
+        
+        SetGameOverMenuButtons();
+    }
+
+    private void SetLevelCompleteMenuUI()
+    {                                      //replace with own background
+        Sprite background = _isFtueOver ? _mainMenuUIData.HamsterBackground : _mainMenuUIData.BounceBackground;
+        SetPanelBackground(_levelCompletePanel, background);
+
+        Sprite container = _isFtueOver ? _mainMenuUIData.HamsterEndContainer : _mainMenuUIData.BounceEndContainer;
+        SetPanelBackground(_levelCompleteUIElements.ContainerPanel, container);
+
         SetGameOverMenuButtons();
     }
 
@@ -203,6 +284,8 @@ public class UIManager : SingletonPersistent<UIManager>
     //Updates main menu buttons
     private void SetMainMenuButtons()
     {
+        //SetButton(_mainMenuUIElements.TutorialButton)
+
         List<Tuple<Button,TextMeshProUGUI>> genericButtonList = new()
         {
             new(_mainMenuUIElements.TutorialButton, _mainMenuUIElements.TutorialText),
@@ -212,40 +295,41 @@ public class UIManager : SingletonPersistent<UIManager>
             new(_mainMenuUIElements.ExitButton, _mainMenuUIElements.ExitText)
         };
 
-        bool isButtonNativeSize = true;
         foreach(Tuple<Button, TextMeshProUGUI> buttonData in genericButtonList) 
         {
-            SetButton(buttonData.Item1, buttonData.Item2, _mainMenuUIData.GeneralButtonSprite, _mainMenuUIData.GeneralButtonTextData, isButtonNativeSize);
+            ColorBlock colorVar = buttonData.Item1.colors;
+            colorVar.highlightedColor = _isFtueOver ? 
+                                        new (_mainMenuUIData.HamsterColor.r, _mainMenuUIData.HamsterColor.g, _mainMenuUIData.HamsterColor.b)
+                                      : new (_mainMenuUIData.BounceColor.r, _mainMenuUIData.BounceColor.g, _mainMenuUIData.BounceColor.b);
+            colorVar.pressedColor = _isFtueOver ?
+                                        new(_mainMenuUIData.HamsterColorPressed.r, _mainMenuUIData.HamsterColorPressed.g, _mainMenuUIData.HamsterColorPressed.b)
+                                      : new(_mainMenuUIData.BounceColorPressed.r, _mainMenuUIData.BounceColorPressed.g, _mainMenuUIData.BounceColorPressed.b);
+            buttonData.Item1.colors = colorVar;
         }
     }
 
     private void SetPauseMenuButtons()
     {
-        List<Tuple<Button, TextMeshProUGUI>> genericButtonList = new()
-        {
-            new(_pauseMenuButtons.OptionsButton, _pauseMenuButtons.OptionsText),
-            new(_pauseMenuButtons.ResumeButton, _pauseMenuButtons.ResumeText),
-            new(_pauseMenuButtons.BackButton, _pauseMenuButtons.BackText)
-        };
+        Sprite options = _isFtueOver ? _mainMenuUIData.HamsterOptionButton : _mainMenuUIData.BounceOptionButton;
+        SetButton(_pauseMenuButtons.OptionsButton, options);
 
-        foreach (Tuple<Button, TextMeshProUGUI> buttonData in genericButtonList)
-        {
-            SetButton(buttonData.Item1, buttonData.Item2, _mainMenuUIData.GeneralButtonSprite, _mainMenuUIData.GeneralButtonTextData);
-        }
+        Sprite home = _isFtueOver ? _mainMenuUIData.HamsterHomeButton : _mainMenuUIData.BounceHomeButton;
+        SetButton(_pauseMenuButtons.BackButton, home);
+
+        Sprite play = _isFtueOver ? _mainMenuUIData.HamsterPlayButton : _mainMenuUIData.BouncePlayButton;
+        SetButton(_pauseMenuButtons.ResumeButton, play);
     }
 
     private void SetGameOverMenuButtons()
     {
-        List<Tuple<Button, TextMeshProUGUI>> genericButtonList = new()
-        {
-            new(_gameOverUIElements.RetryButton, _gameOverUIElements.RetryText),
-            new(_gameOverUIElements.BackButton, _gameOverUIElements.BackText)
-        };
+        Sprite optionsButton = _isFtueOver ? _mainMenuUIData.HamsterOptionButton: _mainMenuUIData.BounceOptionButton;
+        SetButton(_levelCompleteUIElements.OptionsButton, optionsButton);
 
-        foreach (Tuple<Button, TextMeshProUGUI> buttonData in genericButtonList)
-        {
-            SetButton(buttonData.Item1, buttonData.Item2, _mainMenuUIData.GeneralButtonSprite, _mainMenuUIData.GeneralButtonTextData);
-        }
+        Sprite nextLevelButton = _isFtueOver ? _mainMenuUIData.HamsterPlayButton : _mainMenuUIData.BouncePlayButton;
+        SetButton(_levelCompleteUIElements.NextButton, nextLevelButton);
+
+        Sprite homeButton= _isFtueOver ? _mainMenuUIData.HamsterHomeButton : _mainMenuUIData.BounceHomeButton;
+        SetButton(_levelCompleteUIElements.BackButton, homeButton);
     }
     
     //Updates a specific button's sprite, text color, font size, and font style, adjust button native size
@@ -260,6 +344,11 @@ public class UIManager : SingletonPersistent<UIManager>
         {
             button.image.SetNativeSize();
         }
+    }
+
+    private void SetButton(Button button, Sprite sprite)
+    {
+        button.image.sprite = sprite;
     }
 
 
@@ -306,6 +395,19 @@ public class UIManager : SingletonPersistent<UIManager>
     public void PauseScreen()
     {
         _pauseMenuPanel.gameObject.SetActive(true);
+        _gameStateData.PauseGame();
+    }
+
+    public void GameOverScreen()
+    {
+        _gameOverPanel.gameObject.SetActive(true);
+        _gameStateData.PauseGame();
+    }
+
+    public void LevelClearScreen()
+    {
+        _pauseHudButton.gameObject.SetActive(false);
+        _levelCompletePanel.gameObject.SetActive(true);
         _gameStateData.PauseGame();
     }
 }

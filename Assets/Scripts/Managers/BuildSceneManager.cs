@@ -42,7 +42,7 @@ public class BuildSceneManager : SingletonPersistent<BuildSceneManager>
     private IEnumerator LoadAsync(BuildScene buildScene)
     {
         _transitionPanel.SetActive(true);
-        float elapsedTime = 0f;
+        float elapsedTime = -0.5f;
         while (elapsedTime < _transitionScriptableObject.TransitionTime)
         {
             elapsedTime += Time.deltaTime;
@@ -54,7 +54,7 @@ public class BuildSceneManager : SingletonPersistent<BuildSceneManager>
     private IEnumerator LoadAsync(GameObject gameObject)
     {
         _transitionPanel.SetActive(true);
-        float elapsedTime = 0f;
+        float elapsedTime = -0.5f;
         while (elapsedTime < _transitionScriptableObject.TransitionTime)
         {
             elapsedTime += Time.deltaTime;
