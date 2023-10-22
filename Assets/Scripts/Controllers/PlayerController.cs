@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour, IPlayerController
     [Header("Game State Scriptable Object")]
     [SerializeField] private GameStateDataScriptableObject _gameState;
 
+    [Header("FTUE Data")]
+    [SerializeField] private FTUEDataScriptableObject _ftueData;
+    [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private AnimatorOverrideController _hamsterAnimator;
+    [SerializeField] private AnimatorOverrideController _bounceAnimator;
     //Level Data Scriptable Object here
 
     [Header("Player Components")]
@@ -86,6 +91,9 @@ public class PlayerController : MonoBehaviour, IPlayerController
         {
             _rigidBody.bodyType = RigidbodyType2D.Dynamic;
         }
+
+        _playerAnimator.runtimeAnimatorController = _ftueData.IsTutorialOver ? _hamsterAnimator : _bounceAnimator;
+
         _time += Time.deltaTime;
 
         GatherInput();
