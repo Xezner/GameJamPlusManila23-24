@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3feb66e42f3e564c8618f88b9f4b554, type: 3}
   m_Name: GameStateDataScriptableObject
   m_EditorClassIdentifier: 
-  CurrentGameState: 0
-  CurrentPlayerLives: 2
+  CurrentGameState: 1
+  CurrentPlayerLives: 0
   CurrentLevelData:
     Level: 1
     Score: 0
-    StartingPoint: {fileID: 689865285926204261, guid: 4b103084e0da7f44f861104b6a7ed910, type: 3}
+    StartingPoint: {fileID: 0}
     StartingLives: 3
     DefaultValues: {fileID: 11400000, guid: 07f1ffda7c6abb242add7e621121b0e2, type: 2}
