@@ -19,10 +19,6 @@ public class SaveSystemManager : SingletonPersistent<SaveSystemManager>
     {
         _saveData.AddSaveData(levelUpdateEvent.LevelData);
 
-        //int levelFinished = levelUpdateEvent.LevelData.Level;
-        //int currentLevelsUnlocked = _saveData.SaveData.LevelsUnlocked;
-
-        //_saveData.SaveData.CurrentLevel = levelFinished;
-        //_saveData.SaveData.LevelsUnlocked = levelFinished > currentLevelsUnlocked ? levelFinished : currentLevelsUnlocked;
+        //Add Level finished screen here
     }
 }

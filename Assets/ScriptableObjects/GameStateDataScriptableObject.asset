@@ -15,7 +15,7 @@ MonoBehaviour:
   CurrentGameState: 1
   CurrentPlayerLives: 0
   CurrentLevelData:
-    Level: 1
+    Level: 0
     Score: 0
     StartingPoint: {fileID: 0}
     StartingLives: 3
