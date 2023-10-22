@@ -8,6 +8,7 @@ public class SpeedBlock : MonoBehaviour
     // Start is called before the first frame update
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        AudioManager.Instance.PlayInteractSFX();
         _powerUpState.ApplySpeedBuff();
     }
 }

@@ -21,9 +21,9 @@ MonoBehaviour:
     StartingLives: 3
     DefaultValues: {fileID: 0}
   _nextLevelData:
-    Level: 3
+    Level: 1
     Score: 0
-    StartingPoint: {fileID: 2319868702478893583, guid: 6b67686f985f7dc479f0d273a06e8697, type: 3}
+    StartingPoint: {fileID: 6782662334672522148, guid: 0b95303d52961f44d958af071a28b7de, type: 3}
     StartingLives: 3
     DefaultValues: {fileID: 11400000, guid: 07f1ffda7c6abb242add7e621121b0e2, type: 2}
   LevelDataList:

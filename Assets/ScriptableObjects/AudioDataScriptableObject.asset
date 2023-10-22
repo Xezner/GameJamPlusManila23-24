@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889a4f34aa57d8a40b7fb5ba92b3e6fb, type: 3}
   m_Name: AudioDataScriptableObject
   m_EditorClassIdentifier: 
-  BGMVolume: 1
+  BGMVolume: 0.3435416
   SFXVolume: 1
-  DefaultBGMVolume: 0.8
-  BackgroundMusic: {fileID: 8300000, guid: 2e90050a34864e544a888afd8ce94d87, type: 3}
+  DefaultBGMVolume: 0.4
+  BackgroundMusic: {fileID: 8300000, guid: ccb30b330d0b9214faa2d78d567bd360, type: 3}
   SFXClips:
-    FootStepSFX: {fileID: 0}
-    SlashSFX: {fileID: 0}
+    JumpSFX:
+    - {fileID: 8300000, guid: 047d3f14136211b4493485c20b32bba1, type: 3}
+    - {fileID: 8300000, guid: 070ddfa7a5a5e8346970cc4f2c17b80e, type: 3}
+    InteractSFX:
+    - {fileID: 8300000, guid: 2e3d378e6c06e0540933b6e9257cca63, type: 3}
+    DeathSFX: {fileID: 8300000, guid: 3025514c0f7a90d45b4d78fdc16e6c6c, type: 3}
+    GameOverSFX: {fileID: 8300000, guid: 88835c1be5f48fd438d469afd363b5a0, type: 3}

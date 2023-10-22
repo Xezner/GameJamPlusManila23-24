@@ -15,7 +15,7 @@ public class LevelDataScriptableObject : ScriptableObject
     [SerializeField] private LevelData _currentLevelData;
     [SerializeField] private LevelData _nextLevelData;
 
-    public List<LevelData> LevelDataList = new();
+    public List<LevelData> LevelDataList;
 
     public event EventHandler<OnLevelStartEventArgs> OnLevelStart;
 

@@ -174,6 +174,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
             yield return null;
         }
         _isControlsEnabled = true;
+        _gravityData = _powerUpState.NormalGravityData;
     }
     #endregion
 
@@ -323,6 +324,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         }
         _isBounceAmplified = false;
         Jumped?.Invoke();
+        AudioManager.Instance.PlayJumpSound();
     }
 
     private void ResetJumpStates()

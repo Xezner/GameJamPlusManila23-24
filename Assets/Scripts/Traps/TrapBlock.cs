@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrapBlock : MonoBehaviour
 {
     [SerializeField] private GameStateDataScriptableObject _gameState;
-    private float _timeDelay = 0.6f;
+    private float _timeDelay = 1f;
     private bool _isDead = false;
 
     private void OnEnable()
@@ -26,12 +26,15 @@ public class TrapBlock : MonoBehaviour
         }
         _isDead = true;
 
+        AudioManager.Instance.PlayDeathSound();
         if (_gameState.CurrentPlayerLives > 0)
         {
             _gameState.RespawnCharacter();
+            
         }
         else
         {
+            AudioManager.Instance.PlayGameOverSFX();
             _gameState.UpdateCurrentGameState(GameState.IsGameOver);
         }
     }
@@ -43,7 +46,7 @@ public class TrapBlock : MonoBehaviour
             _timeDelay -= Time.deltaTime;
             yield return null;
         }
-        _timeDelay = 0.6f;
+        _timeDelay = 1f;
         _isDead = false;
     }
 

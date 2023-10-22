@@ -17,6 +17,7 @@ public class RingBlock : MonoBehaviour
         _animator.Play("Ring Fade");
         IsEntered = true;
         RingManager.Instance.UpdateRingBlockCount();
+        AudioManager.Instance.PlayInteractSFX();
     }
 
     public void Reset()

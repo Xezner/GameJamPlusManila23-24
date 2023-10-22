@@ -23,6 +23,7 @@ public class AudioDataScriptableObject : ScriptableObject
     public struct AudioClips
     {
         public AudioClip[] JumpSFX;
+        public AudioClip[] InteractSFX;
         public AudioClip DeathSFX;
         public AudioClip GameOverSFX;
         //add more audio clips here
@@ -33,6 +34,13 @@ public class AudioDataScriptableObject : ScriptableObject
     public class OnBGMUpdateEventArgs
     {
         public AudioClip BackgroundMusic;
+    }
+
+    private void Awake()
+    {
+        Debug.Log("ERROR");
+        UpdateAudioVolumes(BGMVolume, SFXVolume);
+        UpdateBackgroundMusic(BackgroundMusic);
     }
 
     //Call this method to invoke the OnVolumeUpdate event

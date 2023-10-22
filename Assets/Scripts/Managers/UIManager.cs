@@ -164,6 +164,8 @@ public class UIManager : SingletonPersistent<UIManager>
             return;
         }
         UpdateUIOnFTUEData();
+
+        //_optionMenuUIElements.BgmSlider.onValueChanged
     }
 
     //Updates UI based on FTUE

@@ -13,11 +13,6 @@ MonoBehaviour:
   m_Name: SaveDataScriptableObject
   m_EditorClassIdentifier: 
   SaveData:
-    CurrentLevel: 1
-    LevelsUnlocked: 1
-  LevelData:
-  - Level: 1
-    Score: 0
-    StartingPoint: {fileID: 689865285926204261, guid: 4b103084e0da7f44f861104b6a7ed910, type: 3}
-    StartingLives: 3
-    DefaultValues: {fileID: 11400000, guid: 07f1ffda7c6abb242add7e621121b0e2, type: 2}
+    CurrentLevel: 0
+    LevelsUnlocked: 0
+  LevelData: []

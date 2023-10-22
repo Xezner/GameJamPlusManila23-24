@@ -9,5 +9,6 @@ public class TransformBlock : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _powerUpState.TransformBallSize(_isBigBall);
+        AudioManager.Instance.PlayInteractSFX();
     }
 }

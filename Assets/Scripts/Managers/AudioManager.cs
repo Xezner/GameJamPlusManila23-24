@@ -20,6 +20,9 @@ public class AudioManager : SingletonPersistent<AudioManager>
         //Subscribe to the events
         _audioData.OnVolumeUpdate += Instance_OnVolumeUpdate;
         _audioData.OnBGMUpdate += Instance_OnBGMUpdate;
+
+        _audioData.UpdateAudioVolumes(_audioData.BGMVolume, _audioData.SFXVolume);
+        _audioData.UpdateBackgroundMusic(_audioData.BackgroundMusic);
     }
 
     // Update is called once per frame
@@ -45,7 +48,8 @@ public class AudioManager : SingletonPersistent<AudioManager>
 
     private void PlaySound(AudioClip audioClip, Vector3 position, float volume = 1f)
     {
-        AudioSource.PlayClipAtPoint(audioClip, position, volume * _audioData.SFXVolume);
+        _audioSource.PlayOneShot(audioClip, volume * _audioData.SFXVolume);
+        //udioSource.PlayClipAtPoint(audioClip, position, volume * _audioData.SFXVolume);
     }
     private void PlaySoundArray(AudioClip[] audioClipArray, Vector3 position, float volume = 1f)
     {
@@ -57,5 +61,25 @@ public class AudioManager : SingletonPersistent<AudioManager>
         _audioSource.Stop();
         _audioSource.clip = backgroundMusic;
         _audioSource.Play();
+    }
+
+    public void PlayDeathSound()
+    {
+        PlaySound(_audioData.SFXClips.DeathSFX, transform.position);
+    }
+
+    public void PlayGameOverSFX()
+    {
+        PlaySound(_audioData.SFXClips.GameOverSFX, transform.position);
+    }
+
+    public void PlayJumpSound()
+    {
+        PlaySoundArray(_audioData.SFXClips.JumpSFX, transform.position);
+    }
+
+    public void PlayInteractSFX()
+    {
+        PlaySoundArray(_audioData.SFXClips.InteractSFX, transform.position);
     }
 }

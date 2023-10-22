@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         float xPos = _player.position.x + _offset.x;
         float yPos = _player.position.y + _offset.y;
@@ -35,6 +35,7 @@ public class CameraController : MonoBehaviour
         GetCameraSnapPosition();
 
         transform.position = _cameraPosition;
+        AudioManager.Instance.transform.position = _player.position;
     }
 
     private void GetCameraSnapPosition()

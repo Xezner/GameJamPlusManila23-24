@@ -46,7 +46,7 @@ MonoBehaviour:
   HamsterPlayButton: {fileID: 21300000, guid: 7960cf6f87ee3e64d8ac760109e60a09, type: 3}
   BouncePauseButton: {fileID: 21300000, guid: 8f51231c367d52d488f03a067f582db8, type: 3}
   HamsterPauseButton: {fileID: 21300000, guid: aacd1124a964ef940b4835991267b30b, type: 3}
-  BounceBackground: {fileID: 21300000, guid: 2679ccf2f36c4f24db04d2fdbbc6dc9d, type: 3}
+  BounceBackground: {fileID: 21300000, guid: f16309a029efdef4685419c5d2f002c5, type: 3}
   HamsterBackground: {fileID: 21300000, guid: fd4b8aca32db50f4996fde8745552c40, type: 3}
   MainMenuBackground: {fileID: 21300000, guid: fd4b8aca32db50f4996fde8745552c40, type: 3}
   OptionsMenuBackground: {fileID: 21300000, guid: fd4b8aca32db50f4996fde8745552c40, type: 3}

@@ -8,6 +8,7 @@ public class AntiGravityBlock : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        AudioManager.Instance.PlayInteractSFX();
         _powerUpState.ApplyAntiGravity();
     }
 }

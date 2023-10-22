@@ -144,7 +144,6 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
   m_Layer: 0
   m_Name: CAM_MainCamera
   m_TagString: MainCamera
@@ -152,14 +151,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -376,14 +367,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5678762580244909095, guid: be78f0b5fb31ac147b73187067c8d1db, type: 3}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5678762580244909095, guid: be78f0b5fb31ac147b73187067c8d1db, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: ccb30b330d0b9214faa2d78d567bd360, type: 3}
     - target: {fileID: 6032503608416698404, guid: be78f0b5fb31ac147b73187067c8d1db, type: 3}
       propertyPath: m_Name
       value: MANAGER_AudioManager
