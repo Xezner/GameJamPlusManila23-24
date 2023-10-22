@@ -15287,7 +15287,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press WASD to roll
+  m_text: Press W and D to roll
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a18db03fe8f30d74facf51d3c87c46d4, type: 2}
   m_sharedMaterial: {fileID: 7483817511809294999, guid: a18db03fe8f30d74facf51d3c87c46d4, type: 2}
