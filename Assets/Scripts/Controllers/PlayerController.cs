@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     public Vector2 FrameInput => _frameInput.Move;
     public event Action<bool, float> GroundedChanged;
     public event Action Jumped;
+    public event Action<float> Run;
 
     #endregion
 
@@ -138,7 +139,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         _isControlsEnabled = false;
         BuildSceneManager.Instance.PlayTransitionScreen();
-        //Add reset values;
+        //newly add
+        _playerStats.ResetValues(onCharacterRespawnEvent.LevelData.DefaultValues);
         StartCoroutine(RespawnPosition(onCharacterRespawnEvent.LevelData.StartingPoint.position));
     }
 
@@ -252,7 +254,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
         {
             _bounceMultiplier = 1;
         }
-
         Physics2D.queriesStartInColliders = _cachedQueryStartInColliders;
     }
 
@@ -336,6 +337,9 @@ public class PlayerController : MonoBehaviour, IPlayerController
         {
             _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _playerStats.MaxSpeed, _playerStats.Acceleration * Time.fixedDeltaTime);
         }
+
+        Run?.Invoke(_frameVelocity.x);
+
     }
 
     #endregion
@@ -425,6 +429,8 @@ public interface IPlayerController
     public event Action<bool, float> GroundedChanged;
 
     public event Action Jumped;
+
+    public event Action<float> Run;
 
     public Vector2 FrameInput { get; }
 }

@@ -37,7 +37,7 @@ public class PlayerAnimator : MonoBehaviour
     private const string GROUND_KEY = "Grounded";
     private const string IDLE_SPEED_KEY = "IdleSpeed";
     private const string JUMP_KEY = "Jump";
-
+    private const string RUN_KEY = "Run";
     private void Awake()
     {
         _player = GetComponentInParent<IPlayerController>();
@@ -47,6 +47,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         _player.Jumped += OnJumped;
         _player.GroundedChanged += OnGroundedChanged;
+        _player.Run += OnRunMovement;
         _moveParticles.Play();
     }
 
@@ -124,6 +125,19 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
+    private void OnRunMovement(float movement)
+    {
+        if(Mathf.Abs(movement) > 1)
+        {
+            _animator.SetTrigger(RunKey);
+        }
+        else
+        {
+            _animator.ResetTrigger(RunKey);
+        }
+
+    }
+
     private void DetectGroundColor()
     {
         var hit = Physics2D.Raycast(transform.position, Vector3.down, 2);
@@ -143,4 +157,5 @@ public class PlayerAnimator : MonoBehaviour
     private static readonly int GroundedKey = Animator.StringToHash(GROUND_KEY);
     private static readonly int IdleSpeedKey = Animator.StringToHash(IDLE_SPEED_KEY);
     private static readonly int JumpKey = Animator.StringToHash(JUMP_KEY);
+    private static readonly int RunKey = Animator.StringToHash(RUN_KEY);
 }

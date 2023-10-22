@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: HamsterAnimation
+  m_Controller: {fileID: 9100000, guid: 6e5b5f4662f713845b0c28185c4ea62c, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a9ceddfb42447114fa50b2ccef3cad96, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a9ceddfb42447114fa50b2ccef3cad96, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 10ea9579577ec2041be5a58180347c25, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 10ea9579577ec2041be5a58180347c25, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 53669dfc998c89b4dab22ceba84d6ae4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 53669dfc998c89b4dab22ceba84d6ae4, type: 2}
