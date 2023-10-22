@@ -149,9 +149,12 @@ public class UIManager : SingletonPersistent<UIManager>
 
         //turns off exit button if on unity_webgl
 #if UNITY_WEBGL
-            _exitButton.gameObject.SetActive(false);
+        _mainMenuUIElements.ExitButton.gameObject.SetActive(false);
 #endif
-        UpdateUIOnFTUEData();   
+        UpdateUIOnFTUEData();
+
+        //_mainMenuUIElements.ExitButton.onClick.RemoveAllListeners();
+        //_mainMenuUIElements.ExitButton.onClick.AddListener(() => Application.Quit());
     }
 
     private bool _isFtueOver;
@@ -406,9 +409,14 @@ public class UIManager : SingletonPersistent<UIManager>
 
     public void LevelClearScreen()
     {
-        _pauseHudButton.gameObject.SetActive(false);
+        _pauseHudButton.transform.parent.gameObject.SetActive(false);
         _levelCompletePanel.gameObject.SetActive(true);
         _gameStateData.PauseGame();
+    }
+
+    public void ActivateHUDScreen()
+    {
+        _pauseHudButton.transform.parent.gameObject.SetActive(true);
     }
 }
 

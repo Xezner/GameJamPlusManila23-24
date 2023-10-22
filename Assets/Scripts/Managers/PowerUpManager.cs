@@ -35,26 +35,26 @@ public class PowerUpManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            _powerUpState.ReverseGravity(_powerUpState.ReversedGravityData);
-        }
-        if(Input.GetKeyDown(KeyCode.Backspace))
-        {
-            _powerUpState.ReverseGravity(_powerUpState.NormalGravityData);
-        }
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            _powerUpState.TransformBallSize(true);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            _powerUpState.TransformBallSize(false);
-        }
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            UIManager.Instance.PauseScreen();
-        }
+        //if(Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    _powerUpState.ReverseGravity(_powerUpState.ReversedGravityData);
+        //}
+        //if(Input.GetKeyDown(KeyCode.Backspace))
+        //{
+        //    _powerUpState.ReverseGravity(_powerUpState.NormalGravityData);
+        //}
+        //if(Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    _powerUpState.TransformBallSize(true);
+        //}
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    _powerUpState.TransformBallSize(false);
+        //}
+        //if(Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    UIManager.Instance.PauseScreen();
+        //}
     }
 
     private void Instance_OnTransformChanged(object sender, PowerUpStateScriptableObject.OnTransformChangedEventArgs onTransformChangedEvent)

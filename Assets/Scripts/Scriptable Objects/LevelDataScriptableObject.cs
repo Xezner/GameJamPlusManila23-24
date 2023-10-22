@@ -63,6 +63,7 @@ public class LevelDataScriptableObject : ScriptableObject
         {
             StartLevel(_nextLevelData.Level);
             BuildSceneManager.Instance.LoadSceneAsync(_nextLevelData.Level + 1);
+            UIManager.Instance.ActivateHUDScreen();
         }
         else
         {
