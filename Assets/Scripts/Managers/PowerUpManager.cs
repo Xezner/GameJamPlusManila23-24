@@ -18,11 +18,17 @@ public class PowerUpManager : MonoBehaviour
     //Speed buff
     private float _speedBuffTimer;
 
+    //Gravity buff
+    private float _gravityBuffDuration;
+    private float _gravityBuffTimer;
+
+
     // Start is called before the first frame update
     void Start()
     {
         _powerUpState.OnTransformChanged += Instance_OnTransformChanged;
         _powerUpState.OnSpeedBlockBuff += Instance_OnSpeedBlockBuff;
+        //_powerUpState.OnGravityReversed += Instance_OnGravityReversed;
     }
 
    
@@ -88,6 +94,34 @@ public class PowerUpManager : MonoBehaviour
         
     }
 
+    //private void Instance_OnGravityReversed(object sender, PowerUpStateScriptableObject.OnGravityReversedEventArgs onGravityReversedEvent)
+    //{
+    //    if (_gravityBuffTimer <= 0f)
+    //    {
+    //        _gravityBuffTimer = _powerUpState.AntiGravityBuffData.Duration;
+    //        StartCoroutine(StartAntiGravity());
+    //    }
+    //    else
+    //    {
+    //        _gravityBuffTimer = _powerUpState.AntiGravityBuffData.Duration;
+    //    }
+    //}
+
+    //private IEnumerator StartAntiGravity()
+    //{
+    //    Debug.Log("Hello");
+    //    _powerUpState.ReverseGravity(_powerUpState.ReversedGravityData);
+
+    //    _gravityBuffTimer = _powerUpState.AntiGravityBuffData.Duration;
+    //    while(_gravityBuffTimer > 0f)
+    //    {
+    //        _gravityBuffTimer -= Time.deltaTime;
+    //        yield return null;
+    //    }
+    //    _gravityBuffTimer = 0f;
+    //    _powerUpState.ReverseGravity(_powerUpState.NormalGravityData);
+    //}
+
     private void OnDisable()
     {
         _powerUpState.OnTransformChanged -= Instance_OnTransformChanged;
@@ -129,5 +163,11 @@ public struct TransformData
 public struct SuperSpeedData
 {
     public float MaxSpeed;
+    public float Duration;
+}
+
+[Serializable]
+public struct AntiGravityBuffData
+{
     public float Duration;
 }

@@ -16,7 +16,7 @@ public class GoalBlock : MonoBehaviour
     {
         Debug.Log("GOAL");
         _collider.enabled = false;
-        _levelData.GetNextLevelData(_gameStateData.CurrentLevelData.Level);
+        _levelData.SaveLevelData(_gameStateData.CurrentLevelData.Level);
     }
 
     // Start is called before the first frame update

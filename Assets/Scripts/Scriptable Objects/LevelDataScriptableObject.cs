@@ -12,7 +12,8 @@ public class LevelDataScriptableObject : ScriptableObject
     [Header("Game State Data Scriptable Object")]
     [SerializeField] private GameStateDataScriptableObject _gameStateData;
 
-    private LevelData _nextLevelData;
+    [SerializeField] private LevelData _currentLevelData;
+    [SerializeField] private LevelData _nextLevelData;
 
     public List<LevelData> LevelDataList = new();
 
@@ -30,8 +31,9 @@ public class LevelDataScriptableObject : ScriptableObject
         public LevelData LevelData;
     }
 
-    public void GetCurrentLevelData(int level)
+    public void StartLevel(int level)
     {
+        Debug.Log($"Starting Level: {level}");
         _gameStateData.UpdateCurrentGameState(GameState.IsPlaying);
         OnLevelStart?.Invoke(this, new OnLevelStartEventArgs
         {
@@ -41,7 +43,7 @@ public class LevelDataScriptableObject : ScriptableObject
 
 
     //Call this method to trigger the event on level finish, subscribed event will get the next level's data
-    public void GetNextLevelData(int level)
+    public void SaveLevelData(int level)
     {
         if(level == 0)
         {

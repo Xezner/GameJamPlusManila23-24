@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BGMVolume: 1
   SFXVolume: 1
-  DefaultBGMVolume: 1
-  BackgroundMusic: {fileID: 0}
+  DefaultBGMVolume: 0.8
+  BackgroundMusic: {fileID: 8300000, guid: 2e90050a34864e544a888afd8ce94d87, type: 3}
   SFXClips:
     FootStepSFX: {fileID: 0}
     SlashSFX: {fileID: 0}

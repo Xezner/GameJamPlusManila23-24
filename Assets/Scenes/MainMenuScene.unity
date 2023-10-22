@@ -373,9 +373,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5678762580244909095, guid: be78f0b5fb31ac147b73187067c8d1db, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678762580244909095, guid: be78f0b5fb31ac147b73187067c8d1db, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 2e90050a34864e544a888afd8ce94d87, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6032503608416698404, guid: be78f0b5fb31ac147b73187067c8d1db, type: 3}
       propertyPath: m_Name
       value: MANAGER_AudioManager
@@ -575,6 +579,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 160121075}
+    - target: {fileID: 1641120523883934204, guid: 2d685609fdd480e40a792933cfdc78aa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: StartLevel
+      objectReference: {fileID: 0}
     - target: {fileID: 1776212997181557218, guid: 2d685609fdd480e40a792933cfdc78aa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 

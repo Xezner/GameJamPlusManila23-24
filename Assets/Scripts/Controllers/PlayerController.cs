@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     //Gravity
     private GravityData _gravityData;
     private bool _isGravityChanged = false;
+    private float _gravityBuffTimer;
 
     //Bounce Amplify;
     private bool _isBounceAmplified = false;
@@ -96,6 +97,27 @@ public class PlayerController : MonoBehaviour, IPlayerController
         transform.rotation = Quaternion.Euler(_gravityData.Rotation);
         _bounceSprite.flipY = _gravityData.IsGravityReversed;
         _isGravityChanged = true;
+
+        if (_gravityBuffTimer <= 0f)
+        {
+            _gravityBuffTimer = _powerUpState.AntiGravityBuffData.Duration;
+            StartCoroutine(StartAntiGravityTimer());
+        }
+        else
+        {
+            _gravityBuffTimer = _powerUpState.AntiGravityBuffData.Duration;
+        }
+    }
+
+    private IEnumerator StartAntiGravityTimer()
+    {
+        while (_gravityBuffTimer > 0f)
+        {
+            _gravityBuffTimer -= Time.deltaTime;
+            yield return null;
+        }
+        _gravityBuffTimer = 0f;
+        _powerUpState.ReverseGravity(_powerUpState.NormalGravityData);
     }
 
     private void Instance_OnBounceAmplify(object sender, PowerUpStateScriptableObject.OnBounceAmplifyEventArgs onBounceAmplifyEvent)
@@ -118,7 +140,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
         BuildSceneManager.Instance.PlayTransitionScreen();
         //Add reset values;
         StartCoroutine(RespawnPosition(onCharacterRespawnEvent.LevelData.StartingPoint.position));
-        //Reset player position
     }
 
     IEnumerator RespawnPosition(Vector3 position)
@@ -140,8 +161,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
             yield return null;
         }
         _isControlsEnabled = true;
-
-
     }
     #endregion
 

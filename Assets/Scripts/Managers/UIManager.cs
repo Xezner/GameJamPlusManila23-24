@@ -17,6 +17,9 @@ public class UIManager : SingletonPersistent<UIManager>
     [Header("Game State Data Scriptable Object")]
     [SerializeField] private GameStateDataScriptableObject _gameStateData;
 
+    [Header("Audio Data")]
+    [SerializeField] private AudioDataScriptableObject _audioData;
+
     [Header("Game Title")]
     [SerializeField] public Image _gameLogo;
 

@@ -52,7 +52,9 @@ public class GameStateDataScriptableObject : ScriptableObject
         OnCharacterRespawn?.Invoke(this, new OnCharacterRespawnEventArgs
         {
             LevelData = CurrentLevelData
-        });  
+        });
+
+        RingManager.Instance.ResetRingBlocks();
         //Animate Death before playing transition screen
         //BuildSceneManager.Instance.PlayTransitionScreen();
         //respawn the character

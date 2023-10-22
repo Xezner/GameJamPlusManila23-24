@@ -17,6 +17,9 @@ public class PowerUpStateScriptableObject : ScriptableObject
     [Header("Speed Buff Data")]
     public SuperSpeedData SuperSpeedData;
 
+    [Header("Anti Gravity Data")]
+    public AntiGravityBuffData AntiGravityBuffData;
+
     //Gravity Reversed Event
     public EventHandler<OnGravityReversedEventArgs> OnGravityReversed;
     public class OnGravityReversedEventArgs
@@ -101,5 +104,10 @@ public class PowerUpStateScriptableObject : ScriptableObject
         { 
             IsOnWater = isOnWater 
         });
+    }
+
+    public void ApplyAntiGravity()
+    {
+        ReverseGravity(true);
     }
 }
