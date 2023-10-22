@@ -49,4 +49,9 @@ public class RingManager : Singleton<RingManager>
             _goalBlock.UnlockGoal();
         }
     }
+
+    public int GetBlockCount()
+    {
+            return _ringBlocksCount;
+    }
 }
