@@ -576,6 +576,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 423040995}
     m_Modifications:
     - target: {fileID: 1130136735770201110, guid: b09b5deb2ff98f04fa0a2b6e0c15d251, type: 3}
+      propertyPath: _gameState
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e94f0aa9503ad6489efdc62f3f8b712, type: 2}
+    - target: {fileID: 1130136735770201110, guid: b09b5deb2ff98f04fa0a2b6e0c15d251, type: 3}
       propertyPath: _goalBlock
       value: 
       objectReference: {fileID: 1266757940}

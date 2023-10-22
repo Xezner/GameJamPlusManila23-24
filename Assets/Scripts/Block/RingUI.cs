@@ -5,13 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 public class RingUI : MonoBehaviour
 {
-    [SerializeField] TMP_Text NumDisplay;
-    int Nums;
+    [SerializeField] private TMP_Text _numDisplay;
+    [SerializeField] private GameStateDataScriptableObject _gameState;
 
     // Update is called once per frame
     void Update()
     {
-        Nums = RingManager.Instance.GetBlockCount();
-        NumDisplay.text = Nums.ToString();
+        _numDisplay.text = _gameState.RingBlocksCount.ToString();
     }
 }
