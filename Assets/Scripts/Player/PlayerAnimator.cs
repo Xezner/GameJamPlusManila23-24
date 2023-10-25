@@ -38,6 +38,8 @@ public class PlayerAnimator : MonoBehaviour
     private const string IDLE_SPEED_KEY = "IdleSpeed";
     private const string JUMP_KEY = "Jump";
     private const string RUN_KEY = "Run";
+
+
     private void Awake()
     {
         _player = GetComponentInParent<IPlayerController>();

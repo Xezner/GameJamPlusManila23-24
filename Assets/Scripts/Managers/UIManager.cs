@@ -328,11 +328,11 @@ public class UIManager : SingletonPersistent<UIManager>
         //Sprite optionsButton = _isFtueOver ? _mainMenuUIData.HamsterOptionButton: _mainMenuUIData.BounceOptionButton;
         //SetButton(_levelCompleteUIElements.OptionsButton, optionsButton);
 
-        Sprite nextLevelButton = _isFtueOver ? _mainMenuUIData.HamsterPlayButton : _mainMenuUIData.BouncePlayButton;
-        SetButton(_levelCompleteUIElements.NextButton, nextLevelButton);
+        Sprite nextLevelButton = _isFtueOver ? _mainMenuUIData.HamsterRetryButton : _mainMenuUIData.BounceRetryButton;
+        SetButton(_gameOverUIElements.RetryButton, nextLevelButton);
 
         Sprite homeButton= _isFtueOver ? _mainMenuUIData.HamsterHomeButton : _mainMenuUIData.BounceHomeButton;
-        SetButton(_levelCompleteUIElements.BackButton, homeButton);
+        SetButton(_gameOverUIElements.BackButton, homeButton);
     }
     
     //Updates a specific button's sprite, text color, font size, and font style, adjust button native size
