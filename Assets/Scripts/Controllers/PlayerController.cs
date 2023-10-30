@@ -211,7 +211,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         if (_gameState.CurrentGameState != GameState.IsPlaying)
         {
-            Debug.Log("Not palying");
             return;
         }
 

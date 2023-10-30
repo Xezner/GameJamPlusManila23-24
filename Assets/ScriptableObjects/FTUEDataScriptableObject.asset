@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09d844b0f4512c43913066138eb3653, type: 3}
   m_Name: FTUEDataScriptableObject
   m_EditorClassIdentifier: 
-  IsTutorialOver: 0
+  IsTutorialOver: 1

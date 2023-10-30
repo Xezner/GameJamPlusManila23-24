@@ -51,6 +51,19 @@ public class AudioDataScriptableObject : ScriptableObject
         OnVolumeUpdate?.Invoke(this, EventArgs.Empty);
     }
 
+    public void UpdateAudioVolume(float value, bool isBGM = true)
+    {
+        if(isBGM)
+        {
+            BGMVolume = value;
+            OnVolumeUpdate?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            SFXVolume = value;
+        }
+    }
+
     //Call this method to invoke the OnBGMUpdate event
     public void UpdateBackgroundMusic(AudioClip backgroundMusic) 
     {

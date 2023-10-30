@@ -15,8 +15,8 @@ public class LevelDataScriptableObject : ScriptableObject
     [SerializeField] private LevelData _currentLevelData;
     [SerializeField] private LevelData _nextLevelData;
 
-    [SerializeField] List<LevelData> _levelDataList;
-    public List<LevelData> LevelDataList { get { return _levelDataList; } private set { } }
+    [SerializeField] protected List<LevelData> _levelDataList;
+    public List<LevelData> LevelDataList { get { return _levelDataList; } }
 
     public event EventHandler<OnLevelStartEventArgs> OnLevelStart;
 
@@ -58,12 +58,19 @@ public class LevelDataScriptableObject : ScriptableObject
             LevelData = _gameStateData.CurrentLevelData
         });
 
-        _nextLevelData = LevelDataList?[level + 1];
+        if (level + 1 < LevelDataList.Count)
+        {
+            _nextLevelData = LevelDataList?[level + 1];
+        }
+        else
+        {
+            _nextLevelData.Level = LevelDataList.Count + 1;
+        }
     }
 
     public void StartNextLevel()
     {
-        if(_nextLevelData.Level <= 3)
+        if(_nextLevelData.Level < LevelDataList.Count)
         {
             StartLevel(_nextLevelData.Level);
             BuildSceneManager.Instance.LoadSceneAsync(_nextLevelData.Level + 1);

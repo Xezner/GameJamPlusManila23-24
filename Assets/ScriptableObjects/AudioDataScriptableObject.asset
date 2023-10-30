@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889a4f34aa57d8a40b7fb5ba92b3e6fb, type: 3}
   m_Name: AudioDataScriptableObject
   m_EditorClassIdentifier: 
-  BGMVolume: 0.3435416
+  BGMVolume: 1
   SFXVolume: 1
   DefaultBGMVolume: 0.4
   BackgroundMusic: {fileID: 8300000, guid: ccb30b330d0b9214faa2d78d567bd360, type: 3}
