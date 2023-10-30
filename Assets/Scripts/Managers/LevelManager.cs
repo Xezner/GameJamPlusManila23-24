@@ -24,6 +24,7 @@ public class LevelManager : SingletonPersistent<LevelManager>
     public void RestartLevel()
     {
         _levelData.StartLevel(_currentLevelData.Level);
+        UIManager.Instance.ActivateHUDScreen();
         BuildSceneManager.Instance.LoadSceneAsync(_currentLevelData.Level + 1);
     }
 

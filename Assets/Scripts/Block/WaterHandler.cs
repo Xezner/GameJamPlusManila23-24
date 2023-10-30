@@ -8,7 +8,6 @@ public class WaterHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("TEST");
         _powerUpState.UpdateOnWater(true);
     }
 

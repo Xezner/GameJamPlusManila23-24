@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using static UIManager;
 
 public class UIManager : SingletonPersistent<UIManager>
 {
@@ -168,6 +169,18 @@ public class UIManager : SingletonPersistent<UIManager>
         }
         UpdateUIOnFTUEData();
 
+        _optionMenuUIElements.BgmSlider.onValueChanged.AddListener(
+            delegate 
+            { 
+                _audioDataScriptableObject.UpdateAudioVolume(_optionMenuUIElements.BgmSlider.value); 
+            });
+
+        _optionMenuUIElements.SfxSlider.onValueChanged.AddListener(
+            delegate
+            {
+                _audioDataScriptableObject.UpdateAudioVolume(_optionMenuUIElements.SfxSlider.value, false);
+            });
+
         //_optionMenuUIElements.BgmSlider.onValueChanged
     }
 
@@ -261,7 +274,7 @@ public class UIManager : SingletonPersistent<UIManager>
         Sprite container = _isFtueOver ? _mainMenuUIData.HamsterEndContainer : _mainMenuUIData.BounceEndContainer;
         SetPanelBackground(_levelCompleteUIElements.ContainerPanel, container);
 
-        SetGameOverMenuButtons();
+        SetLevelCompleteMenuButtons();
     }
 
     //Updates the sprite of a logo/image
@@ -325,16 +338,22 @@ public class UIManager : SingletonPersistent<UIManager>
 
     private void SetGameOverMenuButtons()
     {
-        //Sprite optionsButton = _isFtueOver ? _mainMenuUIData.HamsterOptionButton: _mainMenuUIData.BounceOptionButton;
-        //SetButton(_levelCompleteUIElements.OptionsButton, optionsButton);
-
         Sprite nextLevelButton = _isFtueOver ? _mainMenuUIData.HamsterRetryButton : _mainMenuUIData.BounceRetryButton;
         SetButton(_gameOverUIElements.RetryButton, nextLevelButton);
 
         Sprite homeButton= _isFtueOver ? _mainMenuUIData.HamsterHomeButton : _mainMenuUIData.BounceHomeButton;
         SetButton(_gameOverUIElements.BackButton, homeButton);
     }
-    
+
+    private void SetLevelCompleteMenuButtons()
+    {
+        Sprite nextLevelButton = _isFtueOver ? _mainMenuUIData.HamsterPlayButton : _mainMenuUIData.BouncePlayButton;
+        SetButton(_levelCompleteUIElements.NextButton, nextLevelButton);
+
+        Sprite homeButton = _isFtueOver ? _mainMenuUIData.HamsterHomeButton : _mainMenuUIData.BounceHomeButton;
+        SetButton(_levelCompleteUIElements.BackButton, homeButton);
+    }
+
     //Updates a specific button's sprite, text color, font size, and font style, adjust button native size
     private void SetButton(Button button, TextMeshProUGUI buttonText, Sprite sprite, ButtonTextData buttonTextData, bool isButtonNativeSize = false)
     {
@@ -403,6 +422,7 @@ public class UIManager : SingletonPersistent<UIManager>
 
     public void GameOverScreen()
     {
+        _pauseHudButton.transform.parent.gameObject.SetActive(false);
         _gameOverPanel.gameObject.SetActive(true);
         _gameStateData.PauseGame();
     }
@@ -417,6 +437,11 @@ public class UIManager : SingletonPersistent<UIManager>
     public void ActivateHUDScreen()
     {
         _pauseHudButton.transform.parent.gameObject.SetActive(true);
+    }
+
+    public void DeactivateHUDScreen()
+    {
+        _pauseHudButton.transform.parent.gameObject.SetActive(false);
     }
 }
 
