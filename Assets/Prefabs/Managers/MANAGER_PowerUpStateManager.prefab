@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _powerUpState: {fileID: 11400000, guid: a10c9fa049ecc2b4d83db28d64bb8d78, type: 2}
   _playerStats: {fileID: 11400000, guid: 691b6ba613f115645be92bdd93db1a09, type: 2}
+  _defaultPlayerStats: {fileID: 11400000, guid: 07f1ffda7c6abb242add7e621121b0e2, type: 2}
   _collider: {fileID: 0}
   _bounceGameObject: {fileID: 0}

@@ -10,6 +10,7 @@ public class PowerUpManager : MonoBehaviour
 
     [Header("Player Stats Scriptable Object")]
     [SerializeField] private PlayerStatsScriptableObject _playerStats;
+    [SerializeField] private PlayerStatsScriptableObject _defaultPlayerStats;
 
     [Header("Player Components")]
     [SerializeField] private CapsuleCollider2D _collider;
@@ -62,65 +63,53 @@ public class PowerUpManager : MonoBehaviour
         _collider.size = onTransformChangedEvent.TransformData.NewSize;
         _bounceGameObject.transform.localScale = onTransformChangedEvent.TransformData.NewSize;
         _playerStats.GroundingForce = onTransformChangedEvent.TransformData.GroundingForce;
-        _playerStats.JumpPower = onTransformChangedEvent.TransformData.MaxJump;//
+        _playerStats.JumpPower = onTransformChangedEvent.TransformData.MaxJump;
     }
 
     private void Instance_OnSpeedBlockBuff(object sender, PowerUpStateScriptableObject.OnSpeedBlockBuffEventArgs onSpeedBlockBuffEvent)
     {
-        SuperSpeedData SpeedData = onSpeedBlockBuffEvent.SpeedData;
-        if (_speedBuffTimer <= 0f)
+        SuperSpeedData speedData = onSpeedBlockBuffEvent.SpeedData;
+
+        if(_speedBuffTimer > 0f)
         {
-            _speedBuffTimer = SpeedData.Duration;
-            _playerStats.MaxSpeed = SpeedData.MaxSpeed;
-            StartCoroutine(StartSpeedBuff());
+            _speedBuffTimer = speedData.Duration;
+            return;
         }
-        else
-        {
-            _speedBuffTimer = SpeedData.Duration;
-        }
+
+        _speedBuffTimer = speedData.Duration;
+        StartCoroutine(StartSpeedBuff(speedData));
     }
 
-    private IEnumerator StartSpeedBuff()
+    private IEnumerator StartSpeedBuff(SuperSpeedData speedData)
     {
-        _playerStats.SnapInput = true;
+        _speedBuffTimer = speedData.Duration;
+
+        ApplySpeedBuffStats(speedData);
+
         while (_speedBuffTimer > 0f)
         {
             _speedBuffTimer -= Time.deltaTime;
             yield return null;
         }
         _speedBuffTimer = 0f;
-        _playerStats.SnapInput = false;
-        _playerStats.MaxSpeed = _playerStats.DefaultMaxSpeed;
-        
+        ResetSpeedBuffStats();
     }
 
-    //private void Instance_OnGravityReversed(object sender, PowerUpStateScriptableObject.OnGravityReversedEventArgs onGravityReversedEvent)
-    //{
-    //    if (_gravityBuffTimer <= 0f)
-    //    {
-    //        _gravityBuffTimer = _powerUpState.AntiGravityBuffData.Duration;
-    //        StartCoroutine(StartAntiGravity());
-    //    }
-    //    else
-    //    {
-    //        _gravityBuffTimer = _powerUpState.AntiGravityBuffData.Duration;
-    //    }
-    //}
+    private void ApplySpeedBuffStats(SuperSpeedData superSpeedData)
+    {
+        _playerStats.SnapInput = true;
+        _playerStats.MaxSpeed = superSpeedData.MaxSpeed;
+        _playerStats.Acceleration = superSpeedData.Acceleration;
+        _playerStats.GroundDeceleration = superSpeedData.GroundDecceleration;
+    }
 
-    //private IEnumerator StartAntiGravity()
-    //{
-    //    Debug.Log("Hello");
-    //    _powerUpState.ReverseGravity(_powerUpState.ReversedGravityData);
-
-    //    _gravityBuffTimer = _powerUpState.AntiGravityBuffData.Duration;
-    //    while(_gravityBuffTimer > 0f)
-    //    {
-    //        _gravityBuffTimer -= Time.deltaTime;
-    //        yield return null;
-    //    }
-    //    _gravityBuffTimer = 0f;
-    //    _powerUpState.ReverseGravity(_powerUpState.NormalGravityData);
-    //}
+    private void ResetSpeedBuffStats()
+    {
+        _playerStats.SnapInput = false;
+        _playerStats.MaxSpeed = _defaultPlayerStats.MaxSpeed;
+        _playerStats.Acceleration = _defaultPlayerStats.Acceleration;
+        _playerStats.GroundDeceleration = _defaultPlayerStats.Acceleration;
+    }
 
     private void OnDisable()
     {
@@ -164,6 +153,8 @@ public struct SuperSpeedData
 {
     public float MaxSpeed;
     public float Duration;
+    public float Acceleration;
+    public float GroundDecceleration;
 }
 
 [Serializable]
