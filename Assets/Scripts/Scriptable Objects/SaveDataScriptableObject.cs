@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SaveDataScriptableObject", menuName = "Scriptable Objects/Save Data Scriptable Object")]
@@ -13,7 +14,6 @@ public class SaveDataScriptableObject : ScriptableObject
 
     public void AddSaveData(LevelData levelToSave)
     {
-        Debug.Log("SAVE");
         SaveData.CurrentLevel = levelToSave.Level++;
 
         if(levelToSave.Level >= SaveData.LevelsUnlocked)
@@ -45,11 +45,31 @@ public class SaveDataScriptableObject : ScriptableObject
             }
         }
     }
+
+    public void ResetSaveData()
+    {
+        SaveData = new();
+        LevelData.Clear();
+    }
+}
+
+[CustomEditor(typeof(SaveDataScriptableObject))]
+public class ResetSaveData: Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        SaveDataScriptableObject saveData = (SaveDataScriptableObject)target;
+        if(GUILayout.Button("Reset Save Data"))
+        {
+            saveData.ResetSaveData();
+        }
+    }
 }
 
 [Serializable]
 public class SaveData
 {
-    public int CurrentLevel = 1;
-    public int LevelsUnlocked = 1;
+    public int CurrentLevel = 0;
+    public int LevelsUnlocked = 0;
 }

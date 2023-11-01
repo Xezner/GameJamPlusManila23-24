@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SaveDataScriptableObject
   m_EditorClassIdentifier: 
   SaveData:
-    CurrentLevel: 0
-    LevelsUnlocked: 0
+    CurrentLevel: 1
+    LevelsUnlocked: 1
   LevelData: []
