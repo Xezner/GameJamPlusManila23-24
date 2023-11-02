@@ -79,6 +79,7 @@ public class LevelDataScriptableObject : ScriptableObject
         {
             BuildSceneManager.Instance.LoadSceneAsync(0);
             UIManager.Instance.ActivateMainMenu();
+            UIManager.Instance.ActivateCreditsMenu();
         }
     }
 }

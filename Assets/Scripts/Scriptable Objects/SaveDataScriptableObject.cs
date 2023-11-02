@@ -53,6 +53,7 @@ public class SaveDataScriptableObject : ScriptableObject
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(SaveDataScriptableObject))]
 public class ResetSaveData: Editor
 {
@@ -66,6 +67,7 @@ public class ResetSaveData: Editor
         }
     }
 }
+#endif
 
 [Serializable]
 public class SaveData
