@@ -49,6 +49,9 @@ public class UIManager : SingletonPersistent<UIManager>
     [SerializeField] private Image _levelCompletePanel;
     [SerializeField] private LevelCompleteUIElements _levelCompleteUIElements;
 
+    [Header("Credits Menu")]
+    [SerializeField] private GameObject _creditsMenu;
+
     [Header("Audio Scriptable Object")]
     [SerializeField] private AudioDataScriptableObject _audioDataScriptableObject;
 
@@ -442,6 +445,16 @@ public class UIManager : SingletonPersistent<UIManager>
     public void DeactivateHUDScreen()
     {
         _pauseHudButton.transform.parent.gameObject.SetActive(false);
+    }
+
+    public void ActivateMainMenu()
+    {
+        _mainMenuPanel.gameObject.SetActive(true);
+    }
+
+    public void ActivateCreditsMenu()
+    {
+        _creditsMenu.SetActive(true);
     }
 }
 
