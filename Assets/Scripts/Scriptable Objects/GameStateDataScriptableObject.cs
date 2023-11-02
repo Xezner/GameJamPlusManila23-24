@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu(fileName = "GameStateDataScriptableObject", menuName = "Scriptable Objects/Game State Data Scriptable Object")]
 public class GameStateDataScriptableObject : ScriptableObject
 {
+    public bool IsInvincible = false;
+
     public GameState CurrentGameState;
     public int CurrentPlayerLives;
     public LevelData CurrentLevelData;

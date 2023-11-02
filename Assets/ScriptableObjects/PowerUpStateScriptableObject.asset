@@ -35,7 +35,7 @@ MonoBehaviour:
   SuperSpeedData:
     MaxSpeed: 35
     Duration: 5
-    Acceleration: 300
-    GroundDecceleration: 250
+    Acceleration: 200
+    GroundDecceleration: 150
   AntiGravityBuffData:
     Duration: 5

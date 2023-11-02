@@ -20,6 +20,11 @@ public class TrapBlock : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(_gameState.IsInvincible)
+        {
+            return;
+        }
+
         if(_isDead)
         {
             return;

@@ -88,11 +88,13 @@ public class PlayerController : MonoBehaviour, IPlayerController
         if(_gameState.CurrentGameState != GameState.IsPlaying)
         {
             _rigidBody.bodyType = RigidbodyType2D.Static;
+            _collider.enabled = false;
             return;
         }
         else
         {
             _rigidBody.bodyType = RigidbodyType2D.Dynamic;
+            _collider.enabled = true;
         }
 
         _playerAnimator.runtimeAnimatorController = _ftueData.IsTutorialOver ? _hamsterAnimator : _bounceAnimator;
