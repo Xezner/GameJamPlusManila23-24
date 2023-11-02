@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3feb66e42f3e564c8618f88b9f4b554, type: 3}
   m_Name: GameStateDataScriptableObject
   m_EditorClassIdentifier: 
+  IsInvincible: 0
   CurrentGameState: 1
-  CurrentPlayerLives: 1
+  CurrentPlayerLives: 0
   CurrentLevelData:
-    Level: 1
+    Level: 3
     Score: 0
-    StartingPoint: {fileID: 689865285926204261, guid: 4b103084e0da7f44f861104b6a7ed910, type: 3}
-    StartingLives: 3
+    StartingPoint: {fileID: 2319868702478893583, guid: 6b67686f985f7dc479f0d273a06e8697, type: 3}
+    StartingLives: 0
     DefaultValues: {fileID: 11400000, guid: 07f1ffda7c6abb242add7e621121b0e2, type: 2}
-  RingBlocksCount: 0
+  RingBlocksCount: 5

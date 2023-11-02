@@ -10,6 +10,7 @@ public class BuildSceneManager : SingletonPersistent<BuildSceneManager>
 {
     //Scriptable Object to contain data for transition
     [SerializeField] private TransitionScriptableObject _transitionScriptableObject;
+    [SerializeField] private GameStateDataScriptableObject _gameStateData;
     [SerializeField] private GameObject _transitionPanel;
 
     //Called to set the transition panel to be played
@@ -48,6 +49,7 @@ public class BuildSceneManager : SingletonPersistent<BuildSceneManager>
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        _gameStateData.UpdateCurrentGameState(GameState.IsPlaying);
         SceneManager.LoadSceneAsync((int)buildScene, LoadSceneMode.Single);
     }
 
