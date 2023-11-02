@@ -16,7 +16,7 @@ public class LevelDataScriptableObject : ScriptableObject
     [SerializeField] private LevelData _nextLevelData;
 
     [SerializeField] protected List<LevelData> _levelDataList;
-    public List<LevelData> LevelDataList { get { return _levelDataList; } }
+    public List<LevelData> LevelDataList { get { return _levelDataList; } private set { Debug.LogError("ERROR SHOULD NOT BE SET"); } }
 
     public event EventHandler<OnLevelStartEventArgs> OnLevelStart;
 
@@ -35,7 +35,6 @@ public class LevelDataScriptableObject : ScriptableObject
     public void StartLevel(int level)
     {
         Debug.Log($"Starting Level: {level}");
-        _gameStateData.UpdateCurrentGameState(GameState.IsPlaying);
         OnLevelStart?.Invoke(this, new OnLevelStartEventArgs
         {
             LevelData = LevelDataList[level]
@@ -60,11 +59,11 @@ public class LevelDataScriptableObject : ScriptableObject
 
         if (level + 1 < LevelDataList.Count)
         {
-            _nextLevelData = LevelDataList?[level + 1];
+            _nextLevelData = LevelDataList[level + 1];
         }
         else
         {
-            _nextLevelData.Level = LevelDataList.Count + 1;
+            _nextLevelData.Level = LevelDataList.Count + 5;
         }
     }
 
@@ -79,6 +78,7 @@ public class LevelDataScriptableObject : ScriptableObject
         else
         {
             BuildSceneManager.Instance.LoadSceneAsync(0);
+            UIManager.Instance.ActivateMainMenu();
         }
     }
 }
@@ -88,7 +88,6 @@ public class LevelDataScriptableObject : ScriptableObject
 [Serializable]
 public class LevelData
 {
-    [Range(0, 10)]
     public int Level;
     public int Score;
     public Transform StartingPoint;

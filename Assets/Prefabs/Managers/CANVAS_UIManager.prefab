@@ -1065,6 +1065,7 @@ MonoBehaviour:
     BackButton: {fileID: 5052285876748791047}
     OptionsButton: {fileID: 0}
     ContainerPanel: {fileID: 1656028471954746517}
+  _creditsMenu: {fileID: 69243328830116306}
   _audioDataScriptableObject: {fileID: 11400000, guid: e370934a6996f4a46af3074cadec4506, type: 2}
 --- !u!1 &3709156723522339779
 GameObject:
